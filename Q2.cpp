@@ -1,3 +1,5 @@
+// Luke Osborne
+// losborne@bu.edu
 #include <iostream>
 
 using namespace std;
