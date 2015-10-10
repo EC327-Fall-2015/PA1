@@ -20,7 +20,7 @@ int main()
     cout <<"Side-3: ";
     cin >> c;
 
-    s = (a + b + c) / 2.0;
+    s = (a + b + c) / 2;
     check = (s * (s - a) * (s - b) * (s - c));
 
     if (check <= 0)
@@ -28,6 +28,6 @@ int main()
     else
     {
         cout << "This triangle's area is " << fixed << setprecision(2) << sqrt(check);
-	cout << " square-units, and its perimeter is " << a + b + c << " units.";
+        cout << " square-units and its perimeter is " << a + b + c << " units.";
     }
 }

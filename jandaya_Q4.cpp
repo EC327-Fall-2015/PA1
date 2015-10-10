@@ -1,40 +1,33 @@
 #include <iostream>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
 int main()
 {
-    char chr;
-    int offset, newChr;
 
-    cout << "Enter character: ";
-    cin >> chr;
+    double a, b, c, s, check;
 
-    cout << "Offset (enter 0 to convert case): ";
-    cin >> offset;
+    cout << "Enter the dimensions of the triangle:" <<endl;
 
+    cout << "Side-1: ";
+    cin >> a;
 
-    if (offset == 0)
-    {
-        if ((int)chr >= 65 && (int)chr <= 90)
-            newChr = (int)chr + 32;
-        else if ((int)chr >= 97 && (int)chr <= 122)
-            newChr = (int)chr - 32;
-        else
-            newChr = (int)chr;
-    }
+    cout << "Side-2: ";
+    cin >> b;
 
+    cout <<"Side-3: ";
+    cin >> c;
+
+    s = (a + b + c) / 2;
+    check = (s * (s - a) * (s - b) * (s - c));
+
+    if (check <= 0)
+        cout << "Dimensions " << a <<", " << b <<", " << c <<" do not form a triangle.";
     else
     {
-        newChr = (int)chr + offset;
-    }
-
-    if (newChr > 127)
-    {
-        cout << "Error. Out of range.";
-    }
-    else
-    {
-    cout << "New character: " << (char)newChr;
+        cout << "This triangle's area is " << fixed << setprecision(2) << sqrt(check);
+        cout << " square-units and its perimeter is " << a + b + c << " units.";
     }
 }

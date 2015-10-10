@@ -6,7 +6,7 @@ int main()
 {
     int number1, number2, rm1, rm2, counter = 1, ham = 0;
 
-    cout << "Enter two positive integers:" <<endl;
+    cout << "Enter two positive integers: " <<endl;
     cin >> number1;
     cin >> number2;
 
