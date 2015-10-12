@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 using namespace std;
 
 int main() {
 
-	int secret, guess1, guess2,diff ;
+	int secret, guess1, guess2;
 
 	//Generate random integer
 	srand(time(NULL));
@@ -18,36 +19,33 @@ int main() {
 	
 	//If guess1 is correct
 	if (guess1 == secret)
+	{
 		cout << "Correct! The number is " << secret;
-
+	}
 	//Enter Second Guess
 	
 	do{
-		cout << "Enter next guess: " << endl;
+		cout << "Enter next guess: ";
 		cin >> guess2;
-		diff = secret - guess1;
 			
-			if (abs(guess1 - guess2) > diff)
-			{
-				cout << "Colder" << endl;
-				diff = abs(guess1 - guess2);
-				guess1 = guess2;
-			}
-		if (abs(guess1 - guess2) == diff)
+		if (abs(secret - guess2) > abs(secret-guess1))
 		{
-			cout << "Equal";
-			diff = abs(guess1 - guess2);
+				cout << "Colder" << endl;
+				guess1 = guess2;
+		}
+		if (abs(secret - guess2) == abs(secret - guess1))
+		{
+			cout << "Equal"<<endl;
 			guess1 = guess2;
 		}
-		if (abs(guess1 - guess2) < diff)
+		if (abs(secret - guess2) < abs(secret - guess1))
 		{
-			cout << "Warmer";
-			diff = abs(guess1 - guess2);
+			cout << "Warmer"<<endl;
 			guess1 = guess2;
 		}
 	} while (guess2 != secret);
-		//Looping back causes diff value to reset back to (secret-guess1)
-		//Need to find a way to change the value within that loop to new value.
-			
+
+	cout << "Correct! The number was " << secret << "!" << endl;
+		
 
 }
