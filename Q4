@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	char character;
+	int offset;
+	char newcharacter;
+
+	cout << "Enter Character: ";
+	cin >> character;
+	cout << "Offset (enter 0 to convert case): ";
+	cin >> offset;
+
+	//Changing to Upper/Lower case
+
+	//if it is an upper case
+	if (offset == 0 && int(character) > 96 && int(character) < 123)
+	{
+		newcharacter = char(character - ('a' - 'A'));
+		cout << "New Character: " << newcharacter;
+	}
+
+	//If it is a lower case
+
+	if (offset == 0 && int(character) < 91 && int(character) > 64)
+	{
+		newcharacter = char(character + ('a' - 'A'));
+		cout << "New Character: " << newcharacter;
+	}
+
+	//in cases where it's not a letter and 0 offset
+	if (offset == 0 && (int(character) < 65 || int(character)>122))
+	{
+		cout << "New Character: " << character;
+	}
+
+	if (offset == 0 && int(character)>90 && int(character)<97)
+	{
+		cout << "New Character: " << character;
+	}
+	//Change offset amount
+
+
+	if (offset != 0)
+	{
+		newcharacter = char(int(character) + offset);
+		cout << "New Character: " << newcharacter;
+	}
+
+	if (int(character) + offset > 128)
+	{
+		cout << "Error. Out of Range.";
+	}
+
+}
+
