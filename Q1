@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+	double side1, side2, side3, perimeter, hside, area;
+
+	//Prompt for dimensions 
+	cout << "Enter the dimensions of the triangle: ";
+	cin >> side1;
+	cin >> side2;
+	cin >> side3;
+
+
+	//Check if forms a triangle 
+	//If it is, calculate area and perimeter
+	if (side1 + side2>side3 && side2 + side3>side1 && side1 + side3>side2)
+	{
+		hside = (side1 + side2 + side3) / 2;
+		area = sqrt(hside*(hside - side1)*(hside - side2)*(hside - side3));
+		perimeter = side1 + side2 + side3;
+		cout << "The area is " << area << " square units and its perimeter is " << perimeter << " units";
+	}
+	else
+		cout << "Dimensions " << side1 << ", " << side2 << ", " << side3 << " do not form a triangle.";
+
+}
