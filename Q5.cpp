@@ -1,70 +1,62 @@
-/*
-	John Marcao
-	EC327
-	PA1 Q5
-*/
 
-//PPDs
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
 
 using namespace std;
 
-//Prototype
-void guessHeat(int newGuess, int oldGuess, int goalNumber);
 
 int main(){
-	int goalNumber, oldGuess, newGuess;
-	srand(time(NULL)); // Set up randomness based on clock
-	goalNumber = rand() % 100 + 1; // Generate a random # from 1 to 100 
-	oldGuess = 0;
-	newGuess = 0;
-	
-	//Get User Inputs
-	cout << "Guess a number between 1 and 100." << endl; // I need to clarify the range so you don't guess forever
-	cout << "Enter your first guess: ";
-	cin >> newGuess;
 
-	//Check if the input number is correct
-	if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
-		}
-		
-	do{
-		oldGuess = newGuess;
-		// Ask for the next guess
-		cout << "Enter your next guess: ";
-		cin >> newGuess; // User inputs guess
-		
-		if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
-		}
-		
-		guessHeat(newGuess, oldGuess, goalNumber); // Output the heat rank
-		
-		//Debug aka The Cheating Code
-		//Cheating is against the rules.
-		//cout << "\nThe answer is " << goalNumber << endl;
-		
-	} while (true);
-	
-}
+  int answer = 0;
+  int guess = 0;
+  int lastGuess = 0;
+  int difference = 0;
+  int lastDifference = 0;  
 
-//Functions
-void guessHeat(int newGuess, int oldGuess, int goalNumber){
-	int newDistance = abs(newGuess - goalNumber); // How far were you before?
-	int oldDistance = abs(oldGuess - goalNumber); // How far are you now?
-	
-	if (newDistance < oldDistance){ // If you are closer now, output warmer
-		cout << "Warmer" <<endl;
-	}
-	else if (newDistance > oldDistance){ // If you were closer before, output colder
-		cout << "Colder" << endl;
-	}
-	else{ 					// If your guess is not closer nor farther, say no change
-		cout << "No Change" << endl;
-	}
+  // Generate random number
+  srand(time(0)); // Found this in the textbook, 3.9 - Changes seed to the time in seconds elapsed since the birth of Unix to ensure a different sequence of random numbers every time program is run
+  answer = rand() % 500;
+  
+
+  // Prompt user to enter guess
+  cout << "Enter your first guess: ";
+  cin >> guess;
+
+  // Compare guess to number, prompt user for next guess until user guesses correctly
+  while (guess != answer){
+    lastGuess = guess;
+
+    cout << "Enter your next guess: ";
+    cin >> guess;
+      
+    difference = abs(guess - answer);
+    lastDifference = abs(lastGuess - answer);
+
+   
+    // if the new guess and the previous guest are equidistant from the number of interest, display "no change"
+    if (difference == lastDifference){
+      cout << "No change" << endl;
+    }
+    
+    // if the new guess is closer to the number of interest than the previous guess, display "warmer" 
+    else if (difference < lastDifference && difference != 0) {
+      cout << "Warmer" << endl;
+    }
+    
+    // if the new guess is further from the number of interest than the previous guess, display "colder"
+    else if (difference > lastDifference){
+      cout << "Colder" << endl;    
+    }
+    
+
+  }
+  
+  // if guess is correct, display congratulatory message and number
+  cout << "Correct!  The number was " << guess << "!" << endl; // in the sample output, there are two spaces between Correct! and The. This has been changed to reflect that output. 
+
+
+  return 0;
+
 }
