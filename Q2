@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	//Displays options for user
+	cout << "Celsius to Farenheit (enter 0)" << endl
+		<< "Celsius to Kelvin (enter 1)" << endl
+		<< "Farenheit to Celsius (enter 2)" << endl
+		<< "Farenhiet to Kelvin (enter 3)" << endl
+		<< "Kelvin  to Celsius (enter 4)" << endl
+		<< "Kelvin to Fahrenheit(enter 5)" << endl
+		<< "Conversion type: ";
+
+	int type;
+	cin >> type;
+	// DIfferent sceneraios depending on temperature type
+	if (type == 0)
+	{
+		cout << "Enter the amount in celsius:";
+		double celsius;
+		cin >> celsius;
+		double fah = celsius * 1.8 + 32;
+		cout << celsius << "Celsius is" << fah << "Fahrenheit";
+	}
+	else if (type == 1)
+	{
+		cout << "Enter the amount in celsius:";
+
+		double celsius;
+		cin >> celsius;
+		double kelvin = celsius + 273.15;
+		cout << celsius << "Celsius is" << kelvin << "Kelvin";
+	}
+	else if (type == 2)
+	{
+		cout << "Enter the amount in Fahrenheit";
+		double fahren;
+		cin >> fahren;
+		double celsius = (fahren - 32)* 1.8;
+		cout << fahren << "Farenheit is" << celsius << "Celsius";
+	}
+	else if (type == 3)
+	{
+		cout << "Enter the amount in Fahrenheit";
+		double fah2;
+		cin >> fah2;
+		double kelvin2 = (fah2 + 459.67)*(5 / 9);
+		cout << fah2 << "Farenheit is" << kelvin2 << "Kelvin";
+	}
+	else if (type == 4)
+	{
+		cout << "Enter the amount in kelvin";
+		double kelvin3;
+		cin >> kelvin3;
+		double cels1 = kelvin3 - 273.15;
+		cout << kelvin3 << "Kelvin is" << cels1 << "Celsius";
+	}
+	else if (type == 5)
+		cout << "Enter the amount in Kelvin";
+	double kelvin4;
+	cin >> kelvin4;
+	double fah3 = kelvin4*(9 / 5) - 459.67;
+	cout << kelvin4 << "Kelvin is" << fah3 << "Fahrenheit";
+}
+else
+{cout << "Try entering number 0-5";
+		return 0;
+
+		}
+}
