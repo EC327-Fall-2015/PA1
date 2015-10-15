@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	//prompt user to enter character
+	cout << "Enter character:";
+	char uno;
+	cin >> uno;
+	cout << "Offset (enter 0 to convert case)";
+	int value;
+	cin >> value;
+	if (value == 0)
+		newchar = char(uno);
+	cout << "new character:" << newchar;
+	else if (value > 0)
+		offset = int(uno) + value;
+	newchar = char(offset)
+		cout << "new character:" << offset;
+	else if (value > 177)
+		cout << "Error. Out of Range";
+	return 0;
+}
