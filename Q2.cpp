@@ -1,124 +1,115 @@
-/*
-	John Marcao
-	EC327
-	PA1 Q2
-*/
-
-#include <iostream>
-
+#include <iostream> 
+#include <iomanip>
 using namespace std;
+int main()
+{
+	int input;
+	cout << "Celsius to Fahrenheit (enter 0)" << endl //conversion types
+	<< "Celsius to Kelvin (enter 1)" << endl 
+	<<"Fahrenheit to Celsius (enter 2)" << endl
+	<<"Fahrenheit to Kelvin (enter 3)" << endl
+	<<"Kelvin to Celsius (enter 4)" << endl 
+	<<"Kelvin to Fahrenheit (enter 5)" << endl 
+	<<"Conversion type: ";
+	cin >> input;
 
-int main(){
-	
-	// Declare necesary variables
-	int sel;
-	double input;
-	double output;
-	
-	cout.precision(3); // Set precision value of all digits displayed
-	
-	//Offer a selection of choices ot the user
-	cout << "Celsius to Fahrenheit (enter 0)" << endl;
-	cout << "Celsius to Kelvin (enter 1)" << endl;
-	cout << "Fahrenheit to Celsius (enter 2)" << endl;
-	cout << "Fahrenheit to Kelvin (enter 3)" << endl;
-	cout << "Kelvin to Celsius (enter 4)" << endl;
-	cout << "Kelvin to Fahrenheit (enter 5)" << endl;
-
-	// Ask for input and check if it is valid
-	// If it is not valid, ask again until the input is valid
-	cout << "Conversion type: ";
-	cin >> sel;
-	while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> sel;
-		}
-	
-
-	// Perform  conversion operations
-	// C to F
-	if (sel == 0){
-		cout << "Enter the ammount in Celsius: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = input * (9/5) + 32;
-		cout << input << " Celsius is " << output << " Fahrenheit." << endl;
-	}
-	// C to K
-	else if (sel == 1){
-		cout << "Enter the ammount in Celsius: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = input + 273.15;
-		cout << input << " Celsius is " << output << " Kelvin." << endl;
-	}
-	// F to C
-	else if (sel == 2){
-		cout << "Enter the ammount in Fahrenheit: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = (input - 32) * 5/9;
-		cout << input << " Fahrenheit is " << output << " Celsius." << endl;
-	}
-	// F to K
-	else if (sel == 3){
-		cout << "Enter the ammount in Fahrenheit: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = (input + 459.67) * 5/9;
-		cout << input << " Fahrenheit is " << output << " Kelvin." << endl;
-	}
-	// K to C
-	else if (sel == 4){
-		cout << "Enter the ammount in Kelvin: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = input - 273.15;
-		cout << input << " Kelvin is " << output << " Celsius." << endl;
-	}
-	// K to F
-	else if (sel == 5){
-		cout << "Enter the ammount in Kelvin: ";
-		cin >> input;
-		while (cin.fail()){
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			cout << "Wrong input, try again: ";
-			cin >> input;
-		}
-		output = input * (9.5) - 459.67;
-		cout << input << " Kelvin is " << output << " Fahrenheit." << endl;
-	}
-
-
-
-	return 0;
+	double temp;
+	double Far;
+	double Kel;
+	double Cel;
+while (cin.fail() || input < 0 || input > 5) //error check if not in valid range or if string/character
+{
+	cout <<"Wrong input, try again: ";
+	cin.clear(); //if any characters entered, clear values before
+	cin.ignore(256, '\n');//ignore everythign after until newline character
+	cin >> input; //ask for input again
 }
+	switch (input)
+	{
+		case 0: //Celsius to Fahrenheit
+		cout << "Enter the amount in Celsius: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Far= (temp*1.8)+32;
+		cout << fixed << setprecision(3) << temp << " Celsius is " << fixed << setprecision(3) << Far << " Fahrenheit." << endl;
+		break;
 
+		case 1: //Celsius to Kelvin
+		cout << "Enter the amount in Celsius: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Kel= temp + 273.15;
+		cout << fixed << setprecision(3) << temp << " Celsius is " << fixed << setprecision(3) << Kel << " Kelvin." << endl;
+		break;
+
+		case 2: //Fahrenheit to Celsius
+		cout << "Enter the amount in Fahrenheit: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Cel= (temp-32)/1.8;
+		cout << fixed << setprecision(3) << temp << " Fahrenheit is " << fixed << setprecision(3) << Cel << " Celsius." << endl;
+		break;
+		
+		case 3: //Fahrenheit to Kelvin
+		cout << "Enter the amount in Fahrenehit: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Kel= ((temp-32)/1.8)+273.15;
+		cout << fixed << setprecision(3) << temp << " Fahrenheit is " << fixed << setprecision(3) << Kel << " Kelvin." << endl;
+		break;
+		
+		case 4: //Kelvin to Celsius
+		cout << "Enter the amount in Kelvin: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Cel= temp-273.15;
+		cout << fixed << setprecision(3) << temp << " Kelvin is " << fixed << setprecision(3) << Cel << " Celsius." << endl;
+		break;
+		
+		case 5: //Kelvin to Fahrenheit
+		cout << "Enter the amount in Kelvin: ";
+		cin >> temp;
+		while (cin.fail()) //error check if not number
+		{
+			cout <<"Wrong input, try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> temp;
+		}
+		Far= ((temp-273.15)*1.8)+32;
+		cout << fixed << setprecision(3) << temp << " Kelvin is " << fixed << setprecision(3) << Far << " Fahrenheit." << endl;
+		break;
+		
+	}
+return 0;
+}

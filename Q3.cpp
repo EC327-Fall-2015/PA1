@@ -1,62 +1,52 @@
-/*
-	John Marcao
-	EC327
-	PA1 Q3
-*/
-
-#include <iostream>
-#include <sstream>
-
+#include <iostream> 
+#include <iomanip>
+#include <cmath>
 using namespace std;
+int main()
+{
+	int num1;
+	int num2;
+	cout << "Enter two positive integers:"<< endl;
+	cin >> num1 >> num2; //user number input
+int newnum = num1;
+int newnum2 = num2;
+int hcount=0; //counter
+int rem1;
+int rem2;
+	
+if (newnum > newnum2) //greater number will hold more digits
+{
+	while (newnum > 0)
+	{
+		rem1= newnum % 16; //remainder for hex conversion
+		newnum= newnum/16; //divide first number by 16
+		rem2= newnum2 % 16;
+		newnum2= newnum2/16; //second number calculations
 
-void leadingZeroFiller(string& num1, string& num2);
+		if (rem1 != rem2) //compare both hex values
+			hcount += 1;
 
-int main(){
-	
-	int num1, num2;
-	stringstream stream1, stream2;
-	int hammingDist = 0;
-	
-	cout << "Enter two positive integers:\n";
-	cin >> num1; // Enter the inputs
-	cin >> num2;
-	
-	//Load int num1 into the string stream, converting it to hex in the process
-	//Then, store the string into a new variable
-	stream1 << hex << num1;
-	string num1Hex(stream1.str());
-	
-	stream2 << hex << num2; 
-	string num2Hex(stream2.str());
-	
-	//If one of the numbers is in hex shorter than the other, pad the smaller with zeros to get accurate results
-	leadingZeroFiller(num1Hex, num2Hex);
-	
-	//This for loop goes through each character in the two strings and comapres them
-	//If they are different, increment the counter
-	//Thanks to leadingZeroFiller, both are the same lenght, so I just use the lenght of num1Hex as a condition
-	for (int i = 0; i < num1Hex.size(); i++){
-		if(num1Hex[i] != num2Hex[i]){
-			hammingDist++;
-		}
+		newnum2 = (int)floor(newnum2); //round down to lowest int
+		newnum = (int)floor(newnum);
 	}
+}
+else
+{
+	while (newnum2 > 0)
+	{
+		rem2= newnum2 % 16;
+		newnum2= newnum2/16; //second number calculations
+		rem1= newnum % 16; //remainder for hex conversion
+		newnum= newnum/16; //divide first number by 16
 
-	cout << "Hamming Distance between " << num1 << " and " << num2 << " when numbers are in hex format is: " << hammingDist << endl;
-	
-	return 0;
+		if (rem1 != rem2) //compare both hex values
+			hcount += 1;
+
+		newnum = (int)floor(newnum);
+		newnum2 = (int)floor(newnum2);
+	}
 }
 
-//Functions
-void leadingZeroFiller(string& num1, string& num2){
-	int numberOfZeros;
-	
-	//Checks to see which string is shorter
-	if (num1.size() > num2.size()){
-		numberOfZeros = num1.size() - num2.size(); // Determines how many zeros are needed
-		num2 = string(numberOfZeros, '0').append(num2); //Adds on the zeros to the front (so 45 -> 00045 for example)
-	}
-	else{
-		numberOfZeros = num2.size() - num1.size();
-		num1 = string(numberOfZeros, '0').append(num1);
-	}
+
+cout << "Hamming distance between " << num1 << " and " << num2 << " when numbers are in hex format is: " <<  hcount << endl;
 }

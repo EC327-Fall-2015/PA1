@@ -1,70 +1,52 @@
-/*
-	John Marcao
-	EC327
-	PA1 Q5
-*/
-
-//PPDs
-#include <iostream>
+#include <iostream> 
+#include <iomanip>
+#include <cmath>
 #include <stdlib.h>
-#include <time.h>
-
 using namespace std;
-
-//Prototype
-void guessHeat(int newGuess, int oldGuess, int goalNumber);
-
-int main(){
-	int goalNumber, oldGuess, newGuess;
-	srand(time(NULL)); // Set up randomness based on clock
-	goalNumber = rand() % 100 + 1; // Generate a random # from 1 to 100 
-	oldGuess = 0;
-	newGuess = 0;
+int main()
+{
+	int randnum; //declare variable
+	srand(time(0)); //reset random counter
+	randnum = rand() % 500; //generate random number
+	int guess1;
+	int guess2;
+	int difference1;
+	int difference2;
+	int lastguess;
+	cout << "Enter your first guess: "; //prompt user for first guess
+	cin >> guess1;
+	lastguess= guess1;//last guess holds guess made before to compare
 	
-	//Get User Inputs
-	cout << "Guess a number between 1 and 100." << endl; // I need to clarify the range so you don't guess forever
-	cout << "Enter your first guess: ";
-	cin >> newGuess;
 
-	//Check if the input number is correct
-	if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
+	do //loop until guess is correct
+	{
+	  if (guess1 == randnum) 
+		{
+		  break; //if user enters correct first guess
+		}	
+	cout << "Enter your next guess: ";
+	cin >> guess2;
+	difference1= abs(lastguess-randnum); //difference between numbers
+	difference2= abs(guess2-randnum);
+
+	if (difference2 < difference1) //closer to real number
+		{
+			cout << "Warmer" << endl;
 		}
-		
-	do{
-		oldGuess = newGuess;
-		// Ask for the next guess
-		cout << "Enter your next guess: ";
-		cin >> newGuess; // User inputs guess
-		
-		if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
+	else if (difference2 > difference1) //farther from real number
+		{
+			cout << "Colder" << endl;
 		}
-		
-		guessHeat(newGuess, oldGuess, goalNumber); // Output the heat rank
-		
-		//Debug aka The Cheating Code
-		//Cheating is against the rules.
-		//cout << "\nThe answer is " << goalNumber << endl;
-		
-	} while (true);
-	
+	else //same distance away
+		{
+			cout <<"No change" << endl;
+		}
+	lastguess= guess2; //stores last guess to compare
+	}
+	while (guess2 != randnum);
+
+	cout << "Correct!  The number was "<< randnum << "!" << endl; //return correct value
+
+return 0;
 }
 
-//Functions
-void guessHeat(int newGuess, int oldGuess, int goalNumber){
-	int newDistance = abs(newGuess - goalNumber); // How far were you before?
-	int oldDistance = abs(oldGuess - goalNumber); // How far are you now?
-	
-	if (newDistance < oldDistance){ // If you are closer now, output warmer
-		cout << "Warmer" <<endl;
-	}
-	else if (newDistance > oldDistance){ // If you were closer before, output colder
-		cout << "Colder" << endl;
-	}
-	else{ 					// If your guess is not closer nor farther, say no change
-		cout << "No Change" << endl;
-	}
-}
