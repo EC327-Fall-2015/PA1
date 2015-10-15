@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	cout << "Enter the dimensions of the triangle";
+	int a;
+	cout << "Side-1:";
+	cin >> a;
+	int b;
+	cout << "Side-2:";
+	cin >> b;
+		int c;
+		cout << "Side-3:";
+		cin >> c ;
+		//compute perimeter and area
+		int perim = 0;
+		int area = 0;
+			if (a + b > c || a + c > b || b + c < a);
+			perim = (a + b + c) / 2 && area = pow(perim*(perim - a)(perim - b)(perim - c), .5);
+			cout << "The triangle's " << "area" << "is" << area << "and its perimeter" << "is" << perim << "units." << endl;
+			else if (a + b < c || a + c<b || b + c> a);
+			cout << "Dimensions" << a, b, c << "do not form a triangle." << endl;
+	return 0;
+}
