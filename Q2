@@ -1,0 +1,97 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+//TEMP conversion
+
+int main()
+{
+    //Asks for the degree conversion
+    int type;
+    double degrees, converted;
+    cout << "Conversion type: ";
+    cin >> type;
+    
+    
+    
+    
+    //While loop makes sure user input the right type
+    while (type < 0 || type > 5)
+    {
+        cout << "Wrong input, try again: ";
+        cin >> type;
+    }
+    
+    
+    
+    //This statement converts celsius to fahrenheit
+    if (type == 0)
+    {
+        cout << "Enter the amount in Celsius: ";
+        cin >> degrees;
+        converted = (degrees*(1.8)) + 32;          //Equation converts celsius to fahrenheit
+        cout << degrees << " Celsius is " << converted << " in Fahrenheit.";
+        return 0;
+    }
+    
+    
+    
+    //This statement converts celsius to kelvin
+    if (type == 1)
+    {
+        cout << "Enter the amount in celsius: ";
+        cin >> degrees;
+        converted = degrees + 273;         //Equation converts celsius to kelvin
+        cout << degrees << " Celsius is " << converted << " in Kelvin.";
+        return 0;
+    }
+    
+    
+    //This statement converts fahrenheit to celsius
+    if (type == 2)
+    {
+        cout << "Enter the amount in fahrenheit: ";
+        cin >> degrees;
+        converted = (.555555)*(degrees - 32);        //Equation converts fahrenheit to celsius
+        cout << degrees << " Fahrenheit is " << converted << " in Celsius.";
+        return 0;
+    }
+    
+    
+    
+    //This statement converts fahrenheit to kelvin
+    if (type == 3)
+    {
+        cout << "Enter the amount in Fahrenheit: ";
+        cin >> degrees;
+        converted = (degrees + 459.67)*(.555555); //Equation converts fahrenheit to kelvin
+        cout << degrees << " Fahrenheit is " << converted << " in Kelvin.";
+        return 0;
+    }
+    
+    
+    
+    //This statement converts kelvin to celsius
+    if (type == 4)
+    {
+        cout << "Enter the amount in kelvin: ";
+        cin >> degrees;
+        converted = degrees - 273; //Equation converts kelvin to celsius
+        cout << degrees << " Kelvin is " << converted << " in Celsius.";
+        return 0;
+    }
+    
+    
+    
+    //This statement converts kelvin to fahrenheit
+    if (type == 5)
+    {
+        cout << "Enter the amount in kelvin";
+        cin >> degrees;
+        converted = (1.8)*(degrees - 273) + 32; //Equation converts kelvin to fahrenheit
+        cout << degrees << " Kelvin is " << converted << " in Fahrenheit.";
+        return 0;
+    }
+    
+}
