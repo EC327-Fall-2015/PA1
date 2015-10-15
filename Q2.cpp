@@ -33,7 +33,7 @@ double cel2Fah(double val)
 // Fahrenheit --> Celsius
 double fah2Cel(double val)
 {
-	double X = (((5.0/9.0) * val) - 32);
+	double X = ((val - 32) * (5.0/9.0));			// error fixed: double X = (((5.0/9.0) * val) - 32);
 	//cout << "Cel temp is " << X << endl;
 
 	return X;
