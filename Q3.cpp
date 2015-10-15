@@ -1,62 +1,86 @@
-/*
-	John Marcao
-	EC327
-	PA1 Q3
-*/
-
 #include <iostream>
-#include <sstream>
+#include <cmath>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
 
 using namespace std;
 
-void leadingZeroFiller(string& num1, string& num2);
+// Reference Note: I came across this conversion from decimal to a hex string in Chapter 5 of Liang while doing the assigned reading. I adapted it to a function that I call in my main function.
+string decToHexStr (int decInt){
 
-int main(){
-	
-	int num1, num2;
-	stringstream stream1, stream2;
-	int hammingDist = 0;
-	
-	cout << "Enter two positive integers:\n";
-	cin >> num1; // Enter the inputs
-	cin >> num2;
-	
-	//Load int num1 into the string stream, converting it to hex in the process
-	//Then, store the string into a new variable
-	stream1 << hex << num1;
-	string num1Hex(stream1.str());
-	
-	stream2 << hex << num2; 
-	string num2Hex(stream2.str());
-	
-	//If one of the numbers is in hex shorter than the other, pad the smaller with zeros to get accurate results
-	leadingZeroFiller(num1Hex, num2Hex);
-	
-	//This for loop goes through each character in the two strings and comapres them
-	//If they are different, increment the counter
-	//Thanks to leadingZeroFiller, both are the same lenght, so I just use the lenght of num1Hex as a condition
-	for (int i = 0; i < num1Hex.size(); i++){
-		if(num1Hex[i] != num2Hex[i]){
-			hammingDist++;
-		}
-	}
+  string hexStr = "";
+  
+  while (decInt != 0){
+    int hexMod = decInt % 16;
 
-	cout << "Hamming Distance between " << num1 << " and " << num2 << " when numbers are in hex format is: " << hammingDist << endl;
-	
-	return 0;
+    char hexDig = (hexMod >= 0 && hexMod <= 9) ?
+      static_cast<char>(hexMod + '0'):
+      static_cast<char>(hexMod + 'A');
+
+    hexStr = hexDig + hexStr;
+    decInt /= 16;
+
+  }
+  
+  
+  return hexStr;
 }
 
-//Functions
-void leadingZeroFiller(string& num1, string& num2){
-	int numberOfZeros;
-	
-	//Checks to see which string is shorter
-	if (num1.size() > num2.size()){
-		numberOfZeros = num1.size() - num2.size(); // Determines how many zeros are needed
-		num2 = string(numberOfZeros, '0').append(num2); //Adds on the zeros to the front (so 45 -> 00045 for example)
-	}
-	else{
-		numberOfZeros = num2.size() - num1.size();
-		num1 = string(numberOfZeros, '0').append(num1);
-	}
+
+
+int main(){
+  
+  int integer1;
+  int integer2;
+  
+  // prompt user to enter integer values
+  cout << "Enter two positive integers:" << endl;
+  cin >> integer1;
+  cin >> integer2;
+
+  
+  string hexOne = decToHexStr (integer1); //convert integers to hex string; declare and define variables as the hex strings
+  string hexTwo = decToHexStr (integer2);  
+  int hexOneLength = hexOne.length(); // declare and define variables equal to the lengths of the hex strings respectively
+  int hexTwoLength = hexTwo.length();
+  int hammingDistance = abs(hexOneLength - hexTwoLength); // declare and define initial hamming distance value as the absolute value of the difference in string lengths between the two hex numbers
+
+
+  // decrement the string length variables
+  hexOneLength--;
+  hexTwoLength--;
+
+
+  // first, check if the two numbers are equal, in which case the hamming distance is zero
+  if (hexOne == hexTwo){
+    hammingDistance = 0;
+  }
+  
+
+  /* if they are not equal, compute hamming distance using an if statement within a while loop: The if statement compares respective characters from the hex strings. If the characters are !=, hamming distance is increase by one, if not, the step is skipped.
+     Both length values decrement with each iteration until one of them becomes less than zero and while loop is terminated. */
+  else {
+    while (hexOneLength >= 0 && hexTwoLength >= 0){
+
+      if (hexOne[hexOneLength] != hexTwo[hexTwoLength]){
+	hammingDistance += 1;
+      }
+      
+      hexOneLength--;
+      hexTwoLength--;
+    }
+
+
+  }
+
+
+  // display the final results
+
+  cout << "Hamming distance between " << integer1 << " and " << integer2 << " when numbers are in hex format is: " << hammingDistance << endl;
+
+  
+
+
+  return 0;
 }
