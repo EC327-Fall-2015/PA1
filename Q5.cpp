@@ -1,70 +1,109 @@
 /*
-	John Marcao
-	EC327
-	PA1 Q5
+ssshahin_PA1
+Q5.cpp
+Warmer or Colder?
+Guess the computer's number
 */
 
-//PPDs
 #include <iostream>
-#include <stdlib.h>
+#include <limits>
+#include <cstdlib>
 #include <time.h>
 
 using namespace std;
 
-//Prototype
-void guessHeat(int newGuess, int oldGuess, int goalNumber);
+//declare functions
+void compareWarmCold(const double& now, const double& before, const int& unknown);
+//prints to log whether now is warmer, colder, or same as before in distance to unknown
+
+double absolVal(double num);
+//returns a positive double
 
 int main(){
-	int goalNumber, oldGuess, newGuess;
-	srand(time(NULL)); // Set up randomness based on clock
-	goalNumber = rand() % 100 + 1; // Generate a random # from 1 to 100 
-	oldGuess = 0;
-	newGuess = 0;
-	
-	//Get User Inputs
-	cout << "Guess a number between 1 and 100." << endl; // I need to clarify the range so you don't guess forever
-	cout << "Enter your first guess: ";
-	cin >> newGuess;
+	//declare variables
+	double input, last = 0;
 
-	//Check if the input number is correct
-	if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
+	const int MAX_VALUE = 1000;
+
+	//for checking that input is valid
+	bool valid = false;
+    
+    //initialize random seed
+    srand(time(NULL));
+    
+	//generating random int
+	const int randomint = rand() % (MAX_VALUE - 1) + 1;
+
+	cout<<"Enter your first guess: ";
+	cin>>input;
+	cin.ignore();
+
+	while(input != randomint){
+
+		//if second input, or valid input, runs
+		if (valid && !(input <= 0 || (int) input != input || input > MAX_VALUE || cin.fail())){
+		
+			compareWarmCold(input, last, randomint);
+			valid = false;
+		
 		}
-		
-	do{
-		oldGuess = newGuess;
-		// Ask for the next guess
-		cout << "Enter your next guess: ";
-		cin >> newGuess; // User inputs guess
-		
-		if (newGuess == goalNumber){
-		cout << "Correct! The number was " << goalNumber << "!";
-		return 0;
+
+		if (cin.fail()){
+
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout<<"Please only enter positive integers below "<<MAX_VALUE<<": ";
+
+			if(last != 0)
+				valid = true;
+			else
+				valid = false;
+
+		}else if (input <= 0 || (int) input != input || input > MAX_VALUE){
+			//negative / zero input or double input or input above MAX_VALUE
+			cout<<"Please only enter positive integers below "<<MAX_VALUE<<": ";
+			
+			if(last != 0)
+				valid = true;
+			else
+				valid = false;
+
+		} else {
+
+			valid = true;
+			last = input;
+			cout<<"Enter your next guess: ";
+
 		}
+
+		cin>>input;
+		cin.ignore();
 		
-		guessHeat(newGuess, oldGuess, goalNumber); // Output the heat rank
-		
-		//Debug aka The Cheating Code
-		//Cheating is against the rules.
-		//cout << "\nThe answer is " << goalNumber << endl;
-		
-	} while (true);
-	
+	}
+
+	cout<<"Correct!  The number was "<<randomint<<"!"<<endl;
+
+	return 0;
 }
 
-//Functions
-void guessHeat(int newGuess, int oldGuess, int goalNumber){
-	int newDistance = abs(newGuess - goalNumber); // How far were you before?
-	int oldDistance = abs(oldGuess - goalNumber); // How far are you now?
-	
-	if (newDistance < oldDistance){ // If you are closer now, output warmer
-		cout << "Warmer" <<endl;
+void compareWarmCold(const double& now, const double& before, const int& unknown){
+	if (absolVal(unknown - now) == absolVal(unknown - before)){
+		cout<<"No change"<<endl;
+	}else if (absolVal(unknown - now) > absolVal(unknown - before)){
+		cout<<"Colder"<<endl;
+	}else{
+		cout<<"Warmer"<<endl;
 	}
-	else if (newDistance > oldDistance){ // If you were closer before, output colder
-		cout << "Colder" << endl;
-	}
-	else{ 					// If your guess is not closer nor farther, say no change
-		cout << "No Change" << endl;
-	}
+}
+
+double absolVal(double num){
+	double posnum;
+
+	if (num < 0)
+		posnum = num * -1;
+	else
+		posnum = num;
+
+	return posnum;
 }
