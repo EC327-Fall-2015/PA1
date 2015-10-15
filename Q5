@@ -1,0 +1,51 @@
+//
+//  main.cpp
+//  PA #5
+//
+//  Created by John Le on 10/1/15.
+//  Copyright © 2015 John Le. All rights reserved.
+//
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+
+int main()
+{
+    int number;
+    int random_integer = rand();
+    
+    cout << "Enter you first guess:" << endl;
+    cin >> number;     
+    if(number == random_integer){
+            cout << "Correct! The number was " << random_integer << "!" << endl;
+            return 0;
+    } 
+    while (number != random_integer){
+        int prev_distance;
+        int distance;
+        distance = abs (random_integer - number);
+        cout << "Enter your next guess:" << endl;
+        cin >> number;
+
+        if(number == random_integer){
+            cout << "Correct! The number was " << random_integer << "!" << endl;
+            return 0;
+        }
+        else{
+            prev_distance = distance;
+            distance = abs (random_integer - number);
+            if(distance < prev_distance){
+                cout << "Warmer" << endl;
+            }
+            if(distance > prev_distance){
+                cout << "Colder" << endl;
+            }
+            else{
+                cout << "No Change" << endl;
+            }
+        }
+    }
+    return 0;
+}
