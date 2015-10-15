@@ -1,0 +1,37 @@
+#include <cmath>
+#include <iostream>
+
+
+using namespace std;
+
+int main()
+{
+    double perimeter, area, height, length1, length2, length3; //measurements of the triangle
+    
+    cout << "Enter the dimensions of the triangle: ";   //ask for dimensions use no commas, just space
+    cin >> length1;
+    cin >> length2;
+    cin >> length3;
+
+    cout << "Length 1: " << length1 << endl;
+    cout << "Length 2: " << length2 << endl;
+    cout << "Length 3: " << length3 << endl;
+
+    //this checks if the length of the other 2 lengths added up is greater than the longest length
+    //then goes into if statement to find the height, perimeter and area
+    
+    
+    if (length1 + length2 > length2 && length3 + length3 > length1 && length1 + length3 > length2)
+    {
+        height = (length1 + length2 + length3) / 2;     //this finds the height of the triangle
+        
+        area = sqrt(height*(height - length1)*(height - length2)*(height - length3)); //finds area
+        
+        perimeter = length1 + length2 + length3;  //finds perimeter
+        
+        cout << "This triangle's area is " << area << " square-units and its perimeter is " << perimeter << " units." << endl;
+    }
+    else
+        cout << "Dimensions " << length1 << ", " << length2 << ", " << length3 << " do not form a triangle." << endl;
+    
+}
