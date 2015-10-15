@@ -1,0 +1,77 @@
+//
+//  main.cpp
+//  PA#4
+//
+//  Created by John Le on 10/1/15.
+//  Copyright © 2015 John Le. All rights reserved.
+//
+
+#include <iostream>
+using namespace std;
+
+
+
+int main()
+{
+    int offset;
+    char charac;
+    char newchar;
+    
+    //This changes the cases of the characters
+    
+    cout << "Enter character: ";
+    cin >> charac;
+    
+    cout << "Offset (enter 0 to convert case): ";
+    cin >> offset;
+    
+   
+    
+    
+    //PRINTS OUT THE SAME INPUT IF ITS NOT A CHARACTER
+    if (offset == 0 && int(charac) > 90 && int(charac) < 97)
+    {
+        cout << "New character: " << charac;
+    }
+    
+    
+    if (offset == 0 && (int(charac) < 65 || int(charac) > 122))
+    {
+        cout << "New character: " << charac;
+    }
+    
+    
+    
+    
+    //FINDING CAPITAL AND LOWER CASES CHARACTERS
+    if (offset == 0 && int(charac) < 91 && int(charac) > 64) //Finding if it's a lower case char
+    {
+        newchar = char(charac + ('a' - 'A'));
+        cout << "New character: " << newchar;
+    }
+    
+    
+    if (offset==0 && int(charac)>96 && int(charac) < 123) //Finding if it's a capital char
+    {
+        newchar = char(charac - ('a' - 'A'));
+        cout << "New character: " << newchar << endl;
+    }
+    
+    
+
+    
+
+    //IF THERES AN ERROR
+    if (offset != 0)
+    {
+        newchar = char(offset + int(charac));
+        cout << "New character: " << newchar << endl;
+    }
+    
+    
+    if (offset + int(charac) > 128)
+    {
+        cout << "Error. Out of Range.";
+    }
+    
+}
