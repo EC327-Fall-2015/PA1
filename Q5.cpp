@@ -1,62 +1,50 @@
-
 #include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
+#include <cstdlib>     // for rand and srand functions
 
 using namespace std;
 
-
 int main(){
 
-  int answer = 0;
-  int guess = 0;
-  int lastGuess = 0;
-  int difference = 0;
-  int lastDifference = 0;  
+  int R = rand();      // create a random number
 
-  // Generate random number
-  srand(time(0)); // Found this in the textbook, 3.9 - Changes seed to the time in seconds elapsed since the birth of Unix to ensure a different sequence of random numbers every time program is run
-  answer = rand() % 500;
-  
+  int x;               // the first guess
+  int y;               // the next guess
+  int d1 = abs(x - R); // the absolute value of the difference of the first guess
+  int d2 = abs(y - R); // the absolute value of the difference of the next guess
 
-  // Prompt user to enter guess
-  cout << "Enter your first guess: ";
-  cin >> guess;
+	cout << "Enter your first guess: ";
+	cin >> x;
 
-  // Compare guess to number, prompt user for next guess until user guesses correctly
-  while (guess != answer){
-    lastGuess = guess;
+	if (x == R){
+		cout << "Correct! The number was " << R << endl;    // if it is correct on the first guess
+	}
+	else {
+		cout << "Enter your next guess: ";
+		cin >> y;
+		
+		if (d2 < d1){
+			cout << "Warmer" << endl;
+		}
+		else {
+			cout << "Colder" << endl;
+		}
 
-    cout << "Enter your next guess: ";
-    cin >> guess;
-      
-    difference = abs(guess - answer);
-    lastDifference = abs(lastGuess - answer);
+		while ( y != R ) {
+			int d2 = y - R;
+			cout << "Enter your next guess: ";
+			cin >> y;
+			int d3 = y - R;
+			if (d3 < d2){
+				cout << "Warmer" << endl;
+			}
+			else {
+				cout << "Colder" << endl;
+			}
+		}
 
-   
-    // if the new guess and the previous guest are equidistant from the number of interest, display "no change"
-    if (difference == lastDifference){
-      cout << "No change" << endl;
-    }
-    
-    // if the new guess is closer to the number of interest than the previous guess, display "warmer" 
-    else if (difference < lastDifference && difference != 0) {
-      cout << "Warmer" << endl;
-    }
-    
-    // if the new guess is further from the number of interest than the previous guess, display "colder"
-    else if (difference > lastDifference){
-      cout << "Colder" << endl;    
-    }
-    
+		cout << "Correct! The number was " << R << endl;
+	}
 
-  }
-  
-  // if guess is correct, display congratulatory message and number
-  cout << "Correct!  The number was " << guess << "!" << endl; // in the sample output, there are two spaces between Correct! and The. This has been changed to reflect that output. 
-
-
-  return 0;
+	return 0;
 
 }
