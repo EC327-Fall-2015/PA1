@@ -1,109 +1,67 @@
 #include <iostream>
-#include <iomanip>
+#include <vector>
 #include <string>
-#include <sstream>
+
+//Q2 solution
+// Made by Timothy Chong
+
 using namespace std;
 
-int main()
-{
-	string stringSelect;	
-	string stringTemp;
-	cout.precision(3);
-	cout.setf(ios_base::fixed);
+template <typename T>
+void get_num(T & num) {
+    num = -1;
+    cin >> num;
+    while (cin.fail()) {
+        cout << "Wrong input, try again: ";
+        cin.clear();
+        cin.ignore(100, '\n');
+        cin >> num;
+    }
+}
 
-	cout << "Celsius to Fahrenheit (enter 0)\n"
-		 << "Celsius to Kelvin (enter 1)\n"
-		 << "Fahrenheit to Celsius (enter 2)\n"
-		 << "Fahrenheit to Kelvin (enter 3)\n"
-		 << "Kelvin to Celsius (enter 4)\n"
-		 << "Kelvin to Fahrenheit (enter 5)\n"
-		 << "Conversion Type: ";
-	int numberSelect;
-	float numberTemp;
-	
-	/*Error handling was inspired by http://www.cplusplus.com/forum/articles/6046/ */
-	/*This handles input error when selecting conversion type*/
-	while (true)
-	{
-		getline(cin, stringSelect);
+int main() {
 
-		/***************************************
-		 * String Stream is an object that holds
-                 * a string. The reason it is powerful
-		 * is that it allows me to use the 
-		 * insertion operators that handle errors
-		 * much better than the cin object does.
-		 ***************************************/
-		stringstream readNumber(stringSelect);
-		if (readNumber >> numberSelect) // It seems unintuitive but I believe
-                                                // returns a bool or such as an 
-                                                // indicator that we inserted the data
-		{
-			if (numberSelect >= 0 && numberSelect <= 5)
-			{
-				break;
-			}
-		}
-		cout << "Wrong input, try again: ";
-	}
+    string units[6][2];
+    units[0][0] = "Celsius";
+    units[1][0] = "Celsius";
+    units[2][0] = "Fahrenheit";
+    units[3][0] = "Fahrenheit";
+    units[4][0] = "Kelvin";
+    units[5][0] = "Kelvin";
 
-	string initialTempType;
-	switch (numberSelect)
-	{
-	case 0:
-	case 1:
-		initialTempType = "Celsius";
-		break; // break statements allow us to exit the switch statement
-	case 2:
-	case 3:
-		initialTempType = "Fahrenheit";
-		break;
-	case 4:
-	case 5:
-		initialTempType = "Kelvin";
-		break;
-	default:
-		cout << "Error numberSelect was not valid.\n";
-		break;
-	}
+    units[0][1] = "Fahrenheit";
+    units[1][1] = "Kelvin";
+    units[2][1] = "Celsius";
+    units[3][1] = "Kelvin";
+    units[4][1] = "Celsius";
+    units[5][1] = "Fahrenheit";
 
-	cout << "Enter the amount in " << initialTempType << ": ";
+    //Printing options
+    for(int i = 0; i < 6; i++ ){
+        printf("%s to %s (enter %d)\n", units[i][0].c_str(), units[i][1].c_str(), i);
+    }
 
-	while (true)
-	{
-		getline(cin, stringTemp);
-		stringstream readNumber(stringTemp);
-		if (readNumber >> numberTemp)
-		{
-			break;
-		}
-		cout << "Wrong input, try again: ";
-	}
-	switch (numberSelect)	
-	{
-	case 0:
-		cout << numberTemp << " Celsius is " << (numberTemp * 1.8f) + 32.0f  << " Fahrenheit.\n";
-		break;
-	case 1:
-		cout << numberTemp << " Celsius is " << numberTemp + 273.15f << " Kelvin.\n";
-		break;
-	case 2:
-		cout << numberTemp << " Fahrenheit is " << (numberTemp - 32.0f) / 1.8f << " Celsius.\n";
-		break;
-	case 3:
-		cout << numberTemp << " Fahrenheit is " << (numberTemp - 32.0f) / 1.8f + 273.15f << " Kelvin.\n";
-		break;
-	case 4:
-		cout << numberTemp << " Kelvin is " << numberTemp - 273.15f << " Celsius.\n";
-		break;
-	case 5:
-		cout << numberTemp << " Kelvin is " << ((numberTemp - 273.15f) * 1.8f) + 32.0f << " Fahrenheit.\n";
-		break;
-	default:
-		cout << "Error numberSelect was not valid.\n";
-		break;
-	}
-	
+    //Getting input for type
+    cout << "Conversion type: ";
+    int type = -1;
+    get_num(type);
+    while (type < 0 || type > 5) {
+        cout << "Wrong input, try again: ";
+        get_num(type);
+    }
 
-	return 0;
+    cout << "Enter the amount in " << units[type][0] << ": ";
+    double input = -1;
+    get_num(input);
+    double output = -1;
+    switch(type){
+        case 0 : output = input * 9 / 5 + 32; break;
+        case 1 : output = input + 273.15; break;
+        case 2 : output = ( input - 32 ) * 5 / 9; break;
+        case 3 : output = (input - 32) * 5 / 9 + 273.15; break;
+        case 4 : output = input - 273.15; break;
+        case 5 : output = (input - 273.15) * 9 / 5 + 32; break;
+        default: cout << "Fatal error" << endl; exit(0);
+    }
+    printf("%.3f %s is %.3f %s.\n", input, units[type][0].c_str(), output, units[type][1].c_str());
 }
