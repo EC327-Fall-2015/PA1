@@ -1,34 +1,39 @@
 #include <iostream>
-#include <cctype>
+
 using namespace std;
 
 int main()
 {
-	cout << "Enter character: ";//prompt user to enter character and change to int value
-	char character;
-	cin >> character;
+    //declaring variables for the input and the offset
+    char chinp;
+    int offst;
+    char chout;
+ 
+    //user input for the input and the offset
+    cout << "Enter character: ";
+    cin >> chinp;
+    cout << "Offset (enter 0 to convert case): ";
+    cin >> offst;
 
-	cout << "Offset (enter 0 to convert case): ";//prompt user to input offset value
-	int offset, charValue;
-	cin >> offset;
-
-	//if offset is 0 and character is a letter, program should change case of letter
-	if (offset == 0 && islower(character))//for lowercase go to uppercase
-		cout << "New character: " << static_cast<char>(toupper(character)) << endl;
-	else if (offset == 0 && isupper(character))//for uppercase go to lowercase
-		cout << "New character: " << static_cast<char>(tolower(character)) << endl;
-	else  
-	{	
-		charValue = static_cast<int>(character);
-		int newValue = charValue + offset;//add offset to character to produce new ASCII value
-		if (newValue > 127)
-			cout << "Error. Out of range." << endl;
-		else			
-		{
-			char newAsciiValue = static_cast<char>(newValue);
-			cout << "New character: " << newAsciiValue << endl;
-		}
+    //find the new character
+    if ((offst + chinp) > 126) //highest decimal value of a valid character
+	cout << "Error. Out of range." << endl;
+    else if (offst == 0) //change case
+	{
+	    if (chinp >= 65 && chinp <= 90) //lowercase converted to uppercase
+		chout = chinp + 32;
+	    else if (chinp >= 97 && chinp <= 122) //uppercase converted to lowercase
+		chout = chinp - 32;
+	    else
+		chout = chinp; //numbers/symbols stay the same
+	cout << "New character: " << chout << endl;	
 	}
-
-	return 0;
+	
+    else //offsetting normally
+	{
+	    chout = chinp + offst;
+	    cout << "New character: " << chout << endl;
+	}
+	
+    return 0;
 }

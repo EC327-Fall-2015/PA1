@@ -1,67 +1,208 @@
 #include <iostream>
-#include <vector>
-#include <string>
-
-//Q2 solution
-// Made by Timothy Chong
+#include <limits>
 
 using namespace std;
 
-template <typename T>
-void get_num(T & num) {
-    num = -1;
-    cin >> num;
-    while (cin.fail()) {
-        cout << "Wrong input, try again: ";
-        cin.clear();
-        cin.ignore(100, '\n');
-        cin >> num;
-    }
-}
+int main()
+{
+	//printing conversion options for user to choose
+	cout << "Celsius to Fahrenheit (enter 0)" << endl;
+	cout << "Celsius to Kelvin (enter 1)" << endl;
+	cout << "Fahrenheit to Celsius (enter 2)" << endl;
+	cout << "Fahrenheit to Kelvin (enter 3)" << endl;
+	cout << "Kelvin to Celsius (enter 4)" << endl;
+	cout << "Kelvin to Fahrenheit (enter 5)" << endl;
+	
+	//user input - declare variables for conversion type
+	int convtype;
+	
+	//error check if the input is a string
+	bool isstrconv = false;
+	cout << "Conversion type: ";
+	do {
+		cin >> convtype;
+		if (cin.fail()) { //if input is a string, cin will fail. 
+			
+		  //clear the buffer
+			cin.clear();
+			//clears the entire input that was just entered
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+			cout << "Wrong input, try again: ";
+		}
+		else { //otherwise, the input is valid
+			isstrconv = true;
+		}
+	} while(!isstrconv);
+	
+	//declaring variables
+	double degrin;
+	double degrout;
+	
+	bool isstrdeg = false;
+	bool wronginp = true;
 
-int main() {
+	do
+	{
+		switch (convtype)
+		{
+			case 0: // convert Celsius to Fahrenheit
+				cout << "Enter the amount in Celsius: ";
+				
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
 
-    string units[6][2];
-    units[0][0] = "Celsius";
-    units[1][0] = "Celsius";
-    units[2][0] = "Fahrenheit";
-    units[3][0] = "Fahrenheit";
-    units[4][0] = "Kelvin";
-    units[5][0] = "Kelvin";
+			        //calculate and print answer
+				degrout = degrin * 1.8  + 32;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Celsius is " << degrout << " Fahrenheit." << endl;
+				wronginp = 0;
+				break;
 
-    units[0][1] = "Fahrenheit";
-    units[1][1] = "Kelvin";
-    units[2][1] = "Celsius";
-    units[3][1] = "Kelvin";
-    units[4][1] = "Celsius";
-    units[5][1] = "Fahrenheit";
+			case 1: // convert Celsius to Kelvin 
+				cout << "Enter the amount in Celsius: ";
+				
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
+				  
+				//calculate and print answer  
+				degrout = degrin + 273.15;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Celsius is " << degrout << " Kelvin." << endl;
+				wronginp = 0;
+				break;
 
-    //Printing options
-    for(int i = 0; i < 6; i++ ){
-        printf("%s to %s (enter %d)\n", units[i][0].c_str(), units[i][1].c_str(), i);
-    }
+			case 2: // convert Fahrenheit to Celsius
+				cout << "Enter the amount in Fahrenheit: ";
+			
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
+				
+				//calculate and print  
+				degrout = (degrin - 32) * 0.5555556;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Fahrenheit is " << degrout << " Celsius." << endl;
+				wronginp = 0;
+				break;
 
-    //Getting input for type
-    cout << "Conversion type: ";
-    int type = -1;
-    get_num(type);
-    while (type < 0 || type > 5) {
-        cout << "Wrong input, try again: ";
-        get_num(type);
-    }
+			case 3: // convert Fahrenheit to Kelvin
+				cout << "Enter the amount in Fahrenheit: ";
+				
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
+				
+				//calculate and print  
+				degrout = ((degrin - 32) * 0.5555556) + 273.15;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Fahrenheit is " << degrout << " Kelvin." << endl;
+				wronginp = 0;
+				break;
 
-    cout << "Enter the amount in " << units[type][0] << ": ";
-    double input = -1;
-    get_num(input);
-    double output = -1;
-    switch(type){
-        case 0 : output = input * 9 / 5 + 32; break;
-        case 1 : output = input + 273.15; break;
-        case 2 : output = ( input - 32 ) * 5 / 9; break;
-        case 3 : output = (input - 32) * 5 / 9 + 273.15; break;
-        case 4 : output = input - 273.15; break;
-        case 5 : output = (input - 273.15) * 9 / 5 + 32; break;
-        default: cout << "Fatal error" << endl; exit(0);
-    }
-    printf("%.3f %s is %.3f %s.\n", input, units[type][0].c_str(), output, units[type][1].c_str());
+			case 4: // convert Kelvin to Celsius
+				cout << "Enter the amount in Kelvin: ";
+				
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
+				
+				//calculate and print  
+				degrout = degrin - 273.15;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Kelvin is " << degrout << " Celsius." << endl;
+				wronginp = 0;
+				break;
+
+			case 5: // convert Kelvin to Fahrenheit
+				cout << "Enter the amount in Kelvin: ";
+				
+				// error check for string 
+				  do {
+				    cin >> degrin;
+				    if (cin.fail()) { //if input is a string, the cin will fail. 
+				      //clear the buffer
+				      cin.clear();
+				      //clear the entire input that was just entered
+				      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+				      cout << "Wrong input, try again: ";
+				    }
+				    else { //otherwise, the input is valid
+				      isstrdeg = true;
+				    }
+				  } while(!isstrdeg);
+				
+				//calculate and print  
+				degrout = (degrin - 273.15) * 1.8 + 32;
+				std::cout.precision(3);
+				cout << std::fixed << degrin << " Kelvin is " << degrout << " Fahrenheit." << endl;
+				wronginp = 0;
+				break;
+
+			default: // not a case but is a integer
+			cout << "Wrong input, try again: ";
+			cin >> convtype;
+			break;
+
+		} 
+
+	} while(wronginp == true);
+
+	return 0;
 }

@@ -1,46 +1,46 @@
 #include <iostream>
-#include <iomanip>
 #include <cmath>
-using namespace std;
+#include <iomanip>
 
-static int x = 0xFFFFFFFF;
+using namespace std; 
 
-int main() {
-    /* Store side lengths in length-3 double array. */
-    double x[3] = {0,0,0};
-    double s, a;
+int main()
+{
+	//declaring the side variables
+	double side1;
+	double side2;
+	double side3;
+	
+	//entering the inputs
+	cout << "Enter the dimensions of the triangle:" << endl;
+	
+	cout << "Side-1: ";
+	cin >> side1;
+	cout << "Side-2: ";
+	cin >> side2;
+	cout << "Side-3: ";
+	cin >> side3;
 
-    cout << "Enter the dimensions of the triangle:" << endl;
-    /* Read in the lengths of the three sides. */
-    cout << "Side-1: ";
-    cin >> x[0];
-    cout << "Side-2: ";
-    cin >> x[1];
-    cout << "Side-3: ";
-    cin >> x[2];
-
-    /* Compute semiperimeter. */
-    s = (x[0] + x[1] + x[2]) / 2.0;
-
-    /* Compute squared area (as per Heron's formula). */
-    a = s;
-
-    cout << fixed << setprecision(2);
-    for (int i = 0; i < 3; i++) {
-        a *= (s - x[i]);
-        /* If at some point this goes to 0 (i.e. degenerate triangle) or
-           negative (failed triangle inequality), then this is not a
-           triangle. */
-        if (a <= 0) {
-            cout << "Dimensions " << x[0] << ", " << x[1] << ", "
-                 << x[2] << " do not form a triangle." << endl;
-            return 1;
-        }
-    }
-
-    /* Output results. */
-    cout << "This triangle's area is " << sqrt(a) << " square-units, "
-         << "and its perimeter is " << (s * 2) << " units." << endl;
-    
-    return 0;
+	// checking for valid dimensions
+	if ( ((side1 + side2) < side3) || ((side2 + side3) < side1) || ((side1 + side3) < side2))
+		cout << "Dimensions " << side1 << ", " << side2 << ", " << side3 << " do not form a triangle." << endl;
+	else //calculating area and perimeter using Heron's formula
+	  {
+	        double triarea;
+		double triperi;
+		double semiperi;
+	        semiperi = (side1 + side2 + side3)/2;
+		triarea = sqrt(semiperi * (semiperi - side1) * (semiperi - side2) * (semiperi - side3));
+		triperi = (side1 + side2 + side3);
+		
+		//printing area and perimeter of triangle	
+		if (triarea == 0 || triperi == 0)
+		  cout << "Dimensions " << side1 << ", " << side2 << ", " << side3 << " do not form a triangle." << endl;
+		else
+		  {
+		    std::cout.precision(2);
+		    std::cout << "This triangle's area is " << std::fixed << triarea << " square-units, and its perimeter is " << triperi << " units." <<endl;
+		  }
+	   }	       
+	return 0;	
 }

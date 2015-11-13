@@ -1,40 +1,41 @@
-#include<iostream>
-#include<sstream>
-#include<algorithm> 
-#include<cmath>
- 
+#include <iostream>
+
 using namespace std;
-int main(){
-    int decimal_one, decimal_two;
-        cout<<"Enter two positive integers"<<endl;
-    cin>>decimal_one>>decimal_two;
-    //converting dec to hex 
-    stringstream ss, ss1;
-        ss<<hex<<decimal_one;
-        string res_one(ss.str());
-        ss1<<hex<<decimal_two;
-        string res_two(ss1.str());
-  
-    int size;
-    if (res_one.length()==(res_two.length())){
-        size=res_one.length();
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<< size-count<<endl;
-        }
-    else
-        {
-    size=min(res_one.length(),res_two.length());
-    int a,diff;
-    a=res_one.length()-res_two.length();
-    diff=abs(a);
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<<size-count+diff<<endl;
-        }
-  
-    }
+
+int main()
+{
+	//declare two integer variables
+	int orgnum1;
+	int orgnum2;
+
+	//user input the two integers
+	cout << "Enter two positive integers: " << endl;
+	cin >> orgnum1;
+	cin >> orgnum2;
+	
+	//declaring variables for hamming distance and remainders
+	int num1 = orgnum1;	
+	int num2 = orgnum2;
+	int hamd = 0;
+	int rem1;
+	int rem2;
+	
+	//note: when using "/" to divide integers, the result is an integer!
+	do {
+	    //hex from right to left for FIRST number
+	    rem1 = num1 % 16;
+	    num1 = num1 / 16;
+
+	    //hex from right to left for SECOND number		
+	    rem2 = num2 % 16;
+	    num2 = num2 / 16;
+	    
+	    // if the remainders are not the same, then hamming distance is incremented
+	    if (rem1 != rem2)
+		hamd = hamd++;
+	} while(rem1 != 0 || rem2 != 0);
+
+	cout << "Hamming distance between " << orgnum1 << " and " << orgnum2 << " when numbers are in hex format is: " << hamd << endl;
+
+	return 0;
+}
