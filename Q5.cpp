@@ -1,55 +1,82 @@
-/* Joshua Klein
- * 9/16/15
- *
- * This is the TA solution for Question 5 of PA1.  This program
- * creates a command line number guessing game where the user
- * inputs a number, and the console tells the user if the number
- * is "colder" (farther) or "warmer" (closer) to the number the console
- * is thinking of (determined by a random int).  This process repeats
- * until the correct number is guessed.
- *
- * Note: There is no requirement to limit the answer with modulo,
- * this was added to make the game more realistic.
- *
- * Note 2:  When compiling on lab machines, if you get scope errors, use
- * the command "g++ Q5.cpp -std=c++0x"; this forces the compiler to 
- * compile with C++11 standard libraries.
- *
- */
+#include <iostream>
+#include <sstream>
+#include <cstdlib>
+using namespace std;
 
- #include <iostream> //cout, cin
- #include <math.h> //abs
+int main()
+{
+	int answer = rand() % 1000;
+	int firstGuess, nextGuess, loopGuess;
+	int diffFirst, diffNext, diffLoop;
+	bool isCorrect;
 
- using namespace std;
+	cout << "Enter your first guess: ";
+	cin >> firstGuess;
+	if (firstGuess != answer)
+	{
+		cout << "Enter your next guess: ";
+		cin >> nextGuess;
+		diffFirst = abs (firstGuess - answer);
+		diffNext = abs (nextGuess - answer);
+		if (nextGuess != answer)
+		{
+			if (diffFirst > diffNext)
+			{
+				cout << "Warmer" << endl;
+			}
+			else if (diffFirst < diffNext)
+			{
+				cout << "Colder" << endl;
+			}
+			else if (diffFirst == diffNext)
+			{
+				cout << "No change" << endl;
+			}
+		}
+		else if (nextGuess == answer)
+		{
+			isCorrect = true;
+		}
+	}
+	else if (firstGuess == answer)
+	{
+		isCorrect = true;
+	}
 
- int main() {
- 	//Seeds the rand function with current system time
- 	srand(time(NULL));
 
- 	//Establishes the answer (with limits) and guess variables for program
- 	int answer = abs(rand()%500), currentGuess, previousGuess;
+	while (firstGuess != answer && nextGuess != answer)
+	{
+		cout << "Enter your next guess: ";
+		cin >> loopGuess;
+		if (loopGuess == answer) 
+		{
+			break;
+		}
+		diffNext = abs (nextGuess - answer);
+		diffLoop = abs (loopGuess - answer);
+		if (diffNext > diffLoop)
+		{
+			cout << "Warmer" << endl;
+		}
+		else if (diffNext < diffLoop)
+		{
+			cout << "Colder" << endl;
+		}
+		else if (diffNext == diffLoop)
+		{
+			cout << "No change" << endl;
+		}
+		nextGuess = loopGuess;
+	}
+	
+	isCorrect = true;
 
- 	//Asks user for first guess
- 	cout << "Enter your first guess: ";
- 	cin >> currentGuess;
+	if(isCorrect)
+	{
+		cout << "Correct! The number was " << answer << "!" << endl;
+	}
 
- 	//Loops continually asks user for guesses until user
- 	//guesses correct number
- 	while (answer != currentGuess) {
- 		previousGuess = currentGuess;
- 		cout << "Enter your next guess: ";
- 		cin >> currentGuess;
 
- 		if (answer == currentGuess) {/*Exit while loop*/}
- 		else if (abs(answer-currentGuess) > abs(answer-previousGuess))
- 			cout << "Colder\n";
- 		else if (abs(answer-currentGuess) < abs(answer-previousGuess))
- 			cout << "Warmer\n";
- 		else //Distance between answer and both guesses are the same
- 			cout << "No change\n";
- 	}
-	cout << "Correct!  The number was " << answer << "!\n";
+	return 0;
+}
 
- 	//Terminates main
- 	return 0;
- }

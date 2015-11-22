@@ -1,34 +1,58 @@
 #include <iostream>
-#include <cctype>
+#include <sstream>
 using namespace std;
 
 int main()
 {
-	cout << "Enter character: ";//prompt user to enter character and change to int value
-	char character;
-	cin >> character;
-
-	cout << "Offset (enter 0 to convert case): ";//prompt user to input offset value
-	int offset, charValue;
+	char userInput;
+	int offset;
+	char formattedInput;
+	cout << "Enter character: ";
+	cin >> userInput;
+	cout << "Offset (enter 0 to convert case): ";
 	cin >> offset;
+	// acceptible range 33-126 inclusive
 
-	//if offset is 0 and character is a letter, program should change case of letter
-	if (offset == 0 && islower(character))//for lowercase go to uppercase
-		cout << "New character: " << static_cast<char>(toupper(character)) << endl;
-	else if (offset == 0 && isupper(character))//for uppercase go to lowercase
-		cout << "New character: " << static_cast<char>(tolower(character)) << endl;
-	else  
-	{	
-		charValue = static_cast<int>(character);
-		int newValue = charValue + offset;//add offset to character to produce new ASCII value
-		if (newValue > 127)
-			cout << "Error. Out of range." << endl;
-		else			
+	bool validated;
+	if(userInput + offset <= 126)
 		{
-			char newAsciiValue = static_cast<char>(newValue);
-			cout << "New character: " << newAsciiValue << endl;
+			validated = true;
 		}
+
+	if (offset == 0 && validated)
+	{
+		if (userInput > 64 && userInput < 91)
+		{
+			formattedInput = userInput + 32;
+		}
+		else if (userInput > 96 && userInput < 123)
+		{
+			formattedInput = userInput - 32;
+		}
+		else
+		{
+			formattedInput = userInput;
+		}	
 	}
+	else if (validated)
+	{
+		formattedInput = userInput + offset;	
+	}
+
+	string finalOutput;
+	stringstream ss;
+	if (validated)
+	{
+		ss << formattedInput;
+		ss >> finalOutput;
+		cout << "New character: " << finalOutput << endl;
+	}
+	else
+	{
+		cout << "Error. Out of range." << endl;
+	}
+	
 
 	return 0;
 }
+

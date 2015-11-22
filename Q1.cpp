@@ -1,46 +1,38 @@
 #include <iostream>
+#include <math.h> 
 #include <iomanip>
-#include <cmath>
 using namespace std;
 
-static int x = 0xFFFFFFFF;
+int main()
+{
+	double sideA, sideB, sideC;
+	cout << "Enter the dimensions of the triangle:" << endl;
 
-int main() {
-    /* Store side lengths in length-3 double array. */
-    double x[3] = {0,0,0};
-    double s, a;
+	cout << "Side-1: ";
+	cin >> sideA;
+	cout << "Side-2: ";
+	cin >> sideB;
+	cout << "Side-3: ";
+	cin >> sideC;
 
-    cout << "Enter the dimensions of the triangle:" << endl;
-    /* Read in the lengths of the three sides. */
-    cout << "Side-1: ";
-    cin >> x[0];
-    cout << "Side-2: ";
-    cin >> x[1];
-    cout << "Side-3: ";
-    cin >> x[2];
+	if ((sideA+sideB) > sideC && (sideA+sideC) > sideB && (sideB+sideC) > sideA)
+	{
+		double perimeter = (sideA + sideB + sideC);
+		double semiperimeter = (perimeter/2);
+		double intArea = semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC);
+		double area = sqrt (intArea);
+		cout << "This triangle’s area is " << fixed << std::setprecision(2) << area << " square-units and its perimeter is " << fixed << std::setprecision(2) << perimeter << " units.";
+	}
 
-    /* Compute semiperimeter. */
-    s = (x[0] + x[1] + x[2]) / 2.0;
+	else if (sideA <= 0 || sideB <= 0 || sideC <= 0)
+	{
+		cout << "Dimensions " << sideA << ", " << sideB << ", " << sideC << " do not form a triangle.";
+	}
+	else
+	{
+		cout << "Dimensions " << sideA << ", " << sideB << ", " << sideC << " do not form a triangle.";
+	}
 
-    /* Compute squared area (as per Heron's formula). */
-    a = s;
-
-    cout << fixed << setprecision(2);
-    for (int i = 0; i < 3; i++) {
-        a *= (s - x[i]);
-        /* If at some point this goes to 0 (i.e. degenerate triangle) or
-           negative (failed triangle inequality), then this is not a
-           triangle. */
-        if (a <= 0) {
-            cout << "Dimensions " << x[0] << ", " << x[1] << ", "
-                 << x[2] << " do not form a triangle." << endl;
-            return 1;
-        }
-    }
-
-    /* Output results. */
-    cout << "This triangle's area is " << sqrt(a) << " square-units, "
-         << "and its perimeter is " << (s * 2) << " units." << endl;
-    
-    return 0;
+	cout << endl;
+	return 0;
 }
