@@ -1,0 +1,128 @@
+#include <iostream>
+#include <iomanip>
+#include <math.h>
+using namespace std;
+  float SideOne;
+  float SideTwo;
+  float SideThree;
+  float x;
+  float y;
+  float z;
+int main()
+{
+  //initializing values
+
+
+  cout<<"Enter the dimenstions of the triangle:"<<endl;//this  next block of code asks for the sides of the triangle
+
+  cout<<"Side-1: ";
+
+  cin>>SideOne;
+
+  cout<<"Side-2: ";
+
+  cin>>SideTwo;
+
+  cout<<"Side-3: ";
+
+  cin>>SideThree;
+
+  x=max(SideOne,SideTwo);//this block is about finding the largest side
+
+  y=max(SideOne,SideThree);
+
+  z=max(SideTwo,SideThree);
+  //this next block of nested if and else if statments checks if the entered values are an actual triangle
+ //checking if sideone or sidetwo is the largest
+  if (x>=y)
+	{
+  	if (x>=z)
+    {
+      if (x==SideOne)
+      {
+    	if ((SideTwo+SideThree)<SideOne)
+   	 {
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	   return 0;
+   	 }
+      }
+      else if (x==SideTwo)
+      {
+       	if ((SideOne+SideThree)<SideTwo)
+        	{
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	 	return 0;
+   	 }
+      }
+    }
+	}
+   //checking if sideine or sidethree is the largest
+ if (y>=x)
+	{
+  	if (y>=z)
+    {
+      if (y==SideOne)
+      {
+      	if ((SideTwo+SideThree)<SideOne)
+   	 {
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	   return 0;    
+   	 }
+      }
+      else if (y==SideThree)
+      {
+       	if ((SideOne+SideTwo)<SideThree)
+        	{
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	 	return 0;
+   	 }
+      }
+    }
+	}
+      	//checking if sidetwo or side three is the largest
+ if (z>=y)
+	{
+  	if (z>=x)
+    {
+      if (z==SideTwo)
+      {
+      	if ((SideOne+SideThree)<SideTwo)
+   	 {
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	   return 0;    
+   	 }
+      }
+      else if (x==SideThree)
+      {
+       	if ((SideOne+SideTwo)<SideThree)
+        	{
+   	   cout<<"Dimensions "<<SideOne<<","<<SideTwo<<","<<SideThree<<" do not form a triangle."<<endl;
+   	 	return 0;    
+   	 }
+      }
+    }
+    
+	}
+ float s;
+ int perim;
+ float area;
+	cout<<"The perimeter is: ";
+
+	perim=SideOne+SideTwo+SideThree;
+
+	cout<<perim<<endl;
+
+	cout<<"The area is: ";
+
+	s=((SideOne+SideTwo+SideThree)/2);
+
+	area=sqrt(s*(s-SideOne)*(s-SideTwo)*(s-SideThree));
+
+	cout<<fixed<<setprecision(2)<<area<<endl;
+
+	return 0;
+
+}
+
+
+
