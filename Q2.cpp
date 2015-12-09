@@ -1,67 +1,85 @@
 #include <iostream>
-#include <vector>
-#include <string>
-
-//Q2 solution
-// Made by Timothy Chong
-
+#include <cmath>
+#include <iomanip>
+#include <cctype>
 using namespace std;
 
-template <typename T>
-void get_num(T & num) {
-    num = -1;
-    cin >> num;
-    while (cin.fail()) {
-        cout << "Wrong input, try again: ";
-        cin.clear();
-        cin.ignore(100, '\n');
-        cin >> num;
-    }
-}
+int main ()
+{ 
+  //Introduces variables.
+  int CT;
+  double celsius;
+  double fahrenheit;
+  double kelvin;
+  double out;
 
-int main() {
-
-    string units[6][2];
-    units[0][0] = "Celsius";
-    units[1][0] = "Celsius";
-    units[2][0] = "Fahrenheit";
-    units[3][0] = "Fahrenheit";
-    units[4][0] = "Kelvin";
-    units[5][0] = "Kelvin";
-
-    units[0][1] = "Fahrenheit";
-    units[1][1] = "Kelvin";
-    units[2][1] = "Celsius";
-    units[3][1] = "Kelvin";
-    units[4][1] = "Celsius";
-    units[5][1] = "Fahrenheit";
-
-    //Printing options
-    for(int i = 0; i < 6; i++ ){
-        printf("%s to %s (enter %d)\n", units[i][0].c_str(), units[i][1].c_str(), i);
+  //Output statements for user interface and input for user.
+  cout << "Celsius to Fahrenheit (enter 0)" << endl;
+  cout << "Ceslius to Kelvin (enter 1)" << endl;
+  cout << "Fahrenheit to Celsius (enter 2)" << endl;
+  cout << "Fahrenheit to Kelvin (enter 3)" << endl;
+  cout << "Kelvin to Celsius (enter 4)" << endl;
+  cout << "Kelvin to Fahrenheit (enter 5)" <<endl;
+  cout << "Conversion type: ";
+  cin >> CT;
+ 
+  //Error checking when CT is not a valid entry.
+  while (CT < 0 || CT > 5)
+    {
+      cout << "Wrong input, try again: ";
+      cin >> CT;
     }
 
-    //Getting input for type
-    cout << "Conversion type: ";
-    int type = -1;
-    get_num(type);
-    while (type < 0 || type > 5) {
-        cout << "Wrong input, try again: ";
-        get_num(type);
-    }
+  //If statements corresponding to what happens when CT = an integer in the range given in output.
+  
+  //Converting from Celsius to Fahrenheit
+    if(CT == 0)
+      { 
+	cout << "Enter the amount in Celsius: ";
+	cin >> celsius;
+	out = celsius * (9/5) + 32;
+	cout << std::setprecision(7) << celsius << " Celsius is " << std::setprecision(7) << out << " Fahrenheit." << endl;
+      }
+    //Converting from Celsius to Kelvin 
+   else if(CT == 1)
+      {
+	cout << "Enter the amount in Celsius: ";
+	cin >> celsius;
+	out = celsius + 273.15;
+	cout << std::setprecision(7) << celsius << " Celsius is " << std::setprecision(7) << out << " Kelvin." << endl;
+       }
+    //Converting from Fahrenheit to Celsius 
+   else if (CT == 2)
+      {
+	cout << "Enter the amount in Fahrenheit: ";
+	cin >> fahrenheit;
+	out = (5/9) * (fahrenheit - 32);
+	cout << std::setprecision(7) << fahrenheit << " Fahrenheit is " << std::setprecision(7) << out << " Celsius." << endl;
+      }
+    //Converting from Fahrenheit to Kelvin 
+   else if (CT ==  3)
+      {
+	cout << "Enter the amount in Fahrenheit: ";
+	cin >> fahrenheit;
+	out = ((5/9) * (fahrenheit - 32)) + 273.15;
+	cout << std::setprecision(7) << fahrenheit << " Fahrenheit is " << std::setprecision(7) << out << " Kelvin." << endl;
+      }
+    //Converting from Kelvin to Celsius
+    else if (CT == 4)
+      {
+	cout << "Enter the amount in Kelvin: ";
+	cin >> kelvin;
+	out = kelvin - 273.15;
+        cout << std::setprecision(7) << kelvin << " Kelvin is " << std::setprecision(7) << out << " Celsius." << endl;
+      }
+    //Converting from Kelvin to Fahrenheit
+    else if (CT == 5)
+      {
+	cout << "Enter the amount in Kelvin: ";
+	cin >> kelvin;
+        out = (kelvin - 273.15) * 1.8 + 32;
+	cout << std::setprecision(7) << kelvin << " Kelvin is " << std::setprecision(7) << out << " Fahrenheit." << endl;
+      }
 
-    cout << "Enter the amount in " << units[type][0] << ": ";
-    double input = -1;
-    get_num(input);
-    double output = -1;
-    switch(type){
-        case 0 : output = input * 9 / 5 + 32; break;
-        case 1 : output = input + 273.15; break;
-        case 2 : output = ( input - 32 ) * 5 / 9; break;
-        case 3 : output = (input - 32) * 5 / 9 + 273.15; break;
-        case 4 : output = input - 273.15; break;
-        case 5 : output = (input - 273.15) * 9 / 5 + 32; break;
-        default: cout << "Fatal error" << endl; exit(0);
-    }
-    printf("%.3f %s is %.3f %s.\n", input, units[type][0].c_str(), output, units[type][1].c_str());
-}
+    return 0;
+  }

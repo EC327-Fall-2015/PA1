@@ -4,31 +4,62 @@ using namespace std;
 
 int main()
 {
-	cout << "Enter character: ";//prompt user to enter character and change to int value
-	char character;
-	cin >> character;
-
-	cout << "Offset (enter 0 to convert case): ";//prompt user to input offset value
-	int offset, charValue;
+  //Initializing variables.
+	char letter;
+	int offset;
+	char newletter;
+  //Using output statements and input statements to define letter and offset.
+	cout << "Enter character: ";
+	cin >> letter;
+	cout << "Offset (enter 0 to convert case): ";
 	cin >> offset;
-
-	//if offset is 0 and character is a letter, program should change case of letter
-	if (offset == 0 && islower(character))//for lowercase go to uppercase
-		cout << "New character: " << static_cast<char>(toupper(character)) << endl;
-	else if (offset == 0 && isupper(character))//for uppercase go to lowercase
-		cout << "New character: " << static_cast<char>(tolower(character)) << endl;
-	else  
-	{	
-		charValue = static_cast<int>(character);
-		int newValue = charValue + offset;//add offset to character to produce new ASCII value
-		if (newValue > 127)
-			cout << "Error. Out of range." << endl;
-		else			
-		{
-			char newAsciiValue = static_cast<char>(newValue);
-			cout << "New character: " << newAsciiValue << endl;
-		}
+	//Error checking to make sure offset is > 0.
+	while (offset < 0)
+	{
+		cout << "Invalid offset. Please choose offset greater than or equal to zero." << endl;
+		cout << "Offset: " << endl;
+		cin >> offset;
 	}
+	//Determines what case to change or to keep if number when offset equals 0 and outputs.
+	if (offset == 0)
+	{
+	  if (isalpha(letter))
+	    {
+	      if (islower(letter))
+		{
+		  newletter = toupper(letter);
+		  cout << "New character: " << newletter << endl;
+		}
+	      else if (isupper(letter))
+		{
+		  newletter = tolower(letter);
+		  cout << "New character: " << newletter << endl;
+		}
+	    }
+	  else if (isdigit(letter))
+	    {
+	      cout << "New character: " << letter << endl;
+	    } 
+	  else
+	    {
+	      cout<< "New character: " << letter << endl;
+	    }
+	}
+	//The addition of the input and offset needs to be greater than 127 to get an Error.
+	//Otherwise, the output is equal to the input plus the offset.
+	//Outputs the answer or an error statement.
 
-	return 0;
+	else
+	  {
+	    if (letter + offset > 127 )
+	      { 
+		cout << "Error. Out of range." << endl;
+	      }
+	    else 
+	      {
+	         newletter = letter + offset;
+	         cout << "New character: " << newletter << endl;
+	      }
+	  }
+	return 0;	
 }
