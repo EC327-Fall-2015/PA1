@@ -1,40 +1,37 @@
-#include<iostream>
-#include<sstream>
-#include<algorithm> 
-#include<cmath>
- 
+#include <iostream> 
 using namespace std;
-int main(){
-    int decimal_one, decimal_two;
-        cout<<"Enter two positive integers"<<endl;
-    cin>>decimal_one>>decimal_two;
-    //converting dec to hex 
-    stringstream ss, ss1;
-        ss<<hex<<decimal_one;
-        string res_one(ss.str());
-        ss1<<hex<<decimal_two;
-        string res_two(ss1.str());
-  
-    int size;
-    if (res_one.length()==(res_two.length())){
-        size=res_one.length();
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<< size-count<<endl;
-        }
-    else
-        {
-    size=min(res_one.length(),res_two.length());
-    int a,diff;
-    a=res_one.length()-res_two.length();
-    diff=abs(a);
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<<size-count+diff<<endl;
-        }
-  
-    }
+
+int main()
+{
+	// Ask user to input two positive integers
+	int n, m;
+	
+	cout << "Enter two positive integers: " << endl;
+	cin >> n >> m;
+	
+	// Create a char array whose index = the hex number of the index
+	char hexNum[] = "0123456789ABCDEF";
+	int rem_m,rem_n;
+	int i;
+	
+	// Do-while loop that converts n & m into hex code, and then increments counter i when the hex code does not match
+	do
+	{
+		rem_n = n % 16;
+		rem_m = m % 16;
+		
+		if (hexNum[rem_n] != hexNum[rem_m])
+			i++;
+		
+		n = n / 16;
+		m = m / 16;
+		
+	} while (n != 0 && m != 0);
+	
+	
+	// Print out the hamming distance
+	cout << "Hamming distance between " << n << " and " << m << " when numbers are in hex format is: " << i << endl;
+
+
+	return 0;
+}

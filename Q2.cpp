@@ -1,67 +1,140 @@
-#include <iostream>
-#include <vector>
-#include <string>
-
-//Q2 solution
-// Made by Timothy Chong
-
+#include <iostream> 
+#include <iomanip>
 using namespace std;
 
-template <typename T>
-void get_num(T & num) {
-    num = -1;
-    cin >> num;
-    while (cin.fail()) {
-        cout << "Wrong input, try again: ";
-        cin.clear();
-        cin.ignore(100, '\n');
-        cin >> num;
-    }
+int main()
+{
+	int n;
+	double ideg, fdeg;
+	
+	cout << "Celsius to Fahrenheit (enter 0)" << endl;
+	cout << "Celsius to Kelvin (enter 1)" << endl;
+	cout << "Fahrenheit to Celsius (enter 2)" << endl;
+	cout << "Fahrenheit to Kelvin (enter 3)" << endl;
+	cout << "Kelvin to Celsius (enter 4)" << endl;
+	cout << "Kelvin to Fahrenheit (enter 5)" << endl;
+	cout << "Conversion type: ";
+	cin >> n;
+	
+	// Error-checks user input. If n is < 0 or > 5, then user needs to enter another input.
+	// If cin.fail() is true, then that an input of invalid type was entered.
+	while (n < 0 || n > 5 || cin.fail() ) 
+	{
+		cin.clear(); // Clears the fail bit
+		cin.ignore(10000,'\n'); // Ignores other values on same line
+		cout << "Wrong input, try again: ";
+		cin >> n;
+	}
+	
+	switch (n)
+	{
+		case 0:
+		{
+			cout << "Enter the amount in Celsius: ";
+			cin >> ideg;
+
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			
+			fdeg = ideg * (9/5) + 32;
+			cout << setprecision(3) << fixed << ideg << " Celsius is " << fdeg << " Fahrenheit.";
+			break;
+		}
+		case 1:
+		{
+			cout << "Enter the amount in Celsius: ";
+			cin >> ideg;
+			
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			fdeg = ideg + 273.15;
+			cout << setprecision(3) << fixed << ideg << " Celsius is " << fdeg << " Kelvin.";
+			break;
+		}
+		case 2:
+		{
+			cout << "Enter the amount in Fahrenheit: ";
+			cin >> ideg;
+			
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			fdeg = ideg * ((5.0/9.0) - 32);
+			cout << setprecision(3) << fixed << ideg << " Fahrenheit is " << fdeg << " Celsius.";
+			break;
+		}
+		case 3:
+		{
+			cout << "Enter the amount in Fahrenheit: ";
+			cin >> ideg;
+			
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			fdeg = (5.0/9.0)*(ideg - 32) + 273.15;
+			cout << setprecision(3) << fixed << ideg << " Fahrenheit is " << fdeg << " Kelvin.";
+			break;
+		}
+		case 4:
+		{
+			cout << "Enter the amount in Kelvin: ";
+			cin >> ideg;
+			
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			fdeg = ideg - 273.15;
+			cout << setprecision(3) << fixed << ideg << " Kelvin is " << fdeg << " Celsius.";
+			break;
+		}
+		case 5:
+		{
+			cout << "Enter the amount in Kelvin: ";
+			cin >> ideg;
+			
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(10000,'\n');
+				cout << "Wrong input, try again: ";
+				cin >> ideg;
+			}
+			
+			fdeg = (9.0/5.0)*(ideg - 273.15) + 32;
+			cout << setprecision(3) << fixed << ideg << " Kelvin is " << fdeg << " Fahrenheit.";
+			break;
+		}
+			
+	}
+	
+	cout << endl;
+	return 0;
 }
 
-int main() {
-
-    string units[6][2];
-    units[0][0] = "Celsius";
-    units[1][0] = "Celsius";
-    units[2][0] = "Fahrenheit";
-    units[3][0] = "Fahrenheit";
-    units[4][0] = "Kelvin";
-    units[5][0] = "Kelvin";
-
-    units[0][1] = "Fahrenheit";
-    units[1][1] = "Kelvin";
-    units[2][1] = "Celsius";
-    units[3][1] = "Kelvin";
-    units[4][1] = "Celsius";
-    units[5][1] = "Fahrenheit";
-
-    //Printing options
-    for(int i = 0; i < 6; i++ ){
-        printf("%s to %s (enter %d)\n", units[i][0].c_str(), units[i][1].c_str(), i);
-    }
-
-    //Getting input for type
-    cout << "Conversion type: ";
-    int type = -1;
-    get_num(type);
-    while (type < 0 || type > 5) {
-        cout << "Wrong input, try again: ";
-        get_num(type);
-    }
-
-    cout << "Enter the amount in " << units[type][0] << ": ";
-    double input = -1;
-    get_num(input);
-    double output = -1;
-    switch(type){
-        case 0 : output = input * 9 / 5 + 32; break;
-        case 1 : output = input + 273.15; break;
-        case 2 : output = ( input - 32 ) * 5 / 9; break;
-        case 3 : output = (input - 32) * 5 / 9 + 273.15; break;
-        case 4 : output = input - 273.15; break;
-        case 5 : output = (input - 273.15) * 9 / 5 + 32; break;
-        default: cout << "Fatal error" << endl; exit(0);
-    }
-    printf("%.3f %s is %.3f %s.\n", input, units[type][0].c_str(), output, units[type][1].c_str());
-}
