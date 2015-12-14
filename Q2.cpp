@@ -1,67 +1,159 @@
 #include <iostream>
-#include <vector>
-#include <string>
-
-//Q2 solution
-// Made by Timothy Chong
+#include <cmath>		
+#include <iomanip>	
 
 using namespace std;
 
-template <typename T>
-void get_num(T & num) {
-    num = -1;
-    cin >> num;
-    while (cin.fail()) {
-        cout << "Wrong input, try again: ";
-        cin.clear();
-        cin.ignore(100, '\n');
-        cin >> num;
-    }
-}
+int main()
+{
+	
+	string choice;		//choice of conversion
+	double before;		//number to be converted
+	double after;		//number after conversion
+	
+	cout << "Celsius to Fahrenheit (enter 0)" << endl;
+	cout << "Celsius to Kelvin (enter 1)" << endl;
+	cout << "Fahrenheit to Celsius (enter 2)" << endl;
+	cout << "Fahrenheit to Kelvin (enter 3)" << endl;
+	cout << "Kelvin to Celsius (enter 4)" << endl;
+	cout << "Kelvin to Fahrenheit (enter 5)" << endl;
+	cout << "Conversion type: ";
+	
+	cin >> choice;
+	
+	cout << fixed << setprecision(3);	//displays output up to 3 places after decimal point
+	
+	//
+	//CHECK IF INPUT IS ONE OF THE CHOICES
+	//if input is not the wanted data type, error flag is set on cin.fail() and this runs until input is right data type
+	while (cin.fail() || (choice!="0" && choice!="1" && choice!="2" && choice!="3" && choice!="4" && choice!="5"))
+	{
+		cout << "Wrong input, try again: ";
+		cin.clear();					//clear the error flag
+		cin.ignore(1000, '\n');			//clears up to 1000 characters from the input and/or up until a new line starts
+		cin >> choice;
+	}
+	
+	//
+	//CONVERSION IF STATEMENTS BELOW
+	//
+	if (choice=="0")		//CELSIUS TO FAHRENHEIT
+	{
+		cout << "Enter the amount in Celsius: ";
+		cin >> before;
+		
+		//INPUT CHECKING
+		while(cin.fail())				//if input is not the wanted data type, error flag is set and this runs until input is right data type
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					//clear the error flag
+			cin.ignore(1000, '\n');			//clears up to 1000 characters from the input and/or up until a new line starts
+			cin >> before;
+		}		
+		
+		after = (before * 9/5 + 32);
+		
+		cout << before << " Celsius is " << after << " Fahrenheit.";
+	}
+	
+	else if (choice=="1")	//CELSIUS TO KELVIN
+	{
+		cout << "Enter the amount in Celsius: ";
+		cin >> before;
+		
+		//INPUT CHECKING
+		while(cin.fail())				
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					
+			cin.ignore(1000, '\n');			
+			cin >> before;
+		}		
+				
+		after = (before + 273.15);
+		
+		cout << before << " Celsius is " << after << " Kelvin.";
+	}
+	
+	else if (choice=="2")	//FAHRENHEIT TO CELSIUS
+	{
+		cout << "Enter the amount in Fahrenheit: ";
+		cin >> before;
 
-int main() {
+		//INPUT CHECKING
+		while(cin.fail())				
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					
+			cin.ignore(1000, '\n');			
+			cin >> before;
+		}		
+				
+		after = ((before - 32) * 5/9);
+		
+		cout << before << " Fahrenheit is " << after << " Celcius.";
+	}
 
-    string units[6][2];
-    units[0][0] = "Celsius";
-    units[1][0] = "Celsius";
-    units[2][0] = "Fahrenheit";
-    units[3][0] = "Fahrenheit";
-    units[4][0] = "Kelvin";
-    units[5][0] = "Kelvin";
+	else if (choice=="3")	//FAHRENHEIT TO KELVIN
+	{
+		cout << "Enter the amount in Fahrenheit: ";
+		cin >> before;
 
-    units[0][1] = "Fahrenheit";
-    units[1][1] = "Kelvin";
-    units[2][1] = "Celsius";
-    units[3][1] = "Kelvin";
-    units[4][1] = "Celsius";
-    units[5][1] = "Fahrenheit";
+		//INPUT CHECKING
+		while(cin.fail())				
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					
+			cin.ignore(1000, '\n');			
+			cin >> before;
+		}		
+				
+		after = ((before - 32) * 5/9);			//FAHRENHEIT TO CELSIUS
+		after = (after + 273.15);				//CELSIUS TO KELVIN
+		
+		cout << before << " Fahrenheit is " << after << " Kelvin.";
+	}
 
-    //Printing options
-    for(int i = 0; i < 6; i++ ){
-        printf("%s to %s (enter %d)\n", units[i][0].c_str(), units[i][1].c_str(), i);
-    }
+	else if (choice=="4")	//KELVIN TO CELSIUS
+	{
+		cout << "Enter the amount in Kelvin: ";
+		cin >> before;
+		
+		//INPUT CHECKING
+		while(cin.fail())				
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					
+			cin.ignore(1000, '\n');			
+			cin >> before;
+		}		
+				
+		after = (before - 273.15);
+		
+		cout << before << " Kelvin is " << after << " Celsius.";
+	}
+	
+	else if (choice=="5")	//KELVIN TO FAHRENHEIT
+	{
+		cout << "Enter the amount in Kelvin: ";
+		cin >> before;
 
-    //Getting input for type
-    cout << "Conversion type: ";
-    int type = -1;
-    get_num(type);
-    while (type < 0 || type > 5) {
-        cout << "Wrong input, try again: ";
-        get_num(type);
-    }
-
-    cout << "Enter the amount in " << units[type][0] << ": ";
-    double input = -1;
-    get_num(input);
-    double output = -1;
-    switch(type){
-        case 0 : output = input * 9 / 5 + 32; break;
-        case 1 : output = input + 273.15; break;
-        case 2 : output = ( input - 32 ) * 5 / 9; break;
-        case 3 : output = (input - 32) * 5 / 9 + 273.15; break;
-        case 4 : output = input - 273.15; break;
-        case 5 : output = (input - 273.15) * 9 / 5 + 32; break;
-        default: cout << "Fatal error" << endl; exit(0);
-    }
-    printf("%.3f %s is %.3f %s.\n", input, units[type][0].c_str(), output, units[type][1].c_str());
+		//INPUT CHECKING
+		while(cin.fail())				
+		{
+			cout << "Wrong input, try again: ";
+			cin.clear();					
+			cin.ignore(1000, '\n');			
+			cin >> before;
+		}		
+				
+		after = (before - 273.15);			//KELVIN TO CELSIUS
+		
+		after = (after * 9/5 + 32);			//CELSIUS TO FAHRENHEIT
+		
+		
+		cout << before << " Kelvin is " << after << " Fahrenheit.";
+	}
+		
+return 0;
 }

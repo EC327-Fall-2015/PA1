@@ -1,34 +1,59 @@
 #include <iostream>
-#include <cctype>
+
 using namespace std;
 
 int main()
 {
-	cout << "Enter character: ";//prompt user to enter character and change to int value
-	char character;
-	cin >> character;
-
-	cout << "Offset (enter 0 to convert case): ";//prompt user to input offset value
-	int offset, charValue;
+	char input;						//user's inputted character
+	char output;					//the program's output
+	int offset;						//user's inputted offset
+	
+	int u2l = 'a' - 'A';			//decimal distance from ASCII upper case to lower case
+	
+	cout << "Enter character: ";
+	cin >> input;
+	
+	cout << "Offset (enter 0 to convert case): ";
 	cin >> offset;
-
-	//if offset is 0 and character is a letter, program should change case of letter
-	if (offset == 0 && islower(character))//for lowercase go to uppercase
-		cout << "New character: " << static_cast<char>(toupper(character)) << endl;
-	else if (offset == 0 && isupper(character))//for uppercase go to lowercase
-		cout << "New character: " << static_cast<char>(tolower(character)) << endl;
-	else  
-	{	
-		charValue = static_cast<int>(character);
-		int newValue = charValue + offset;//add offset to character to produce new ASCII value
-		if (newValue > 127)
-			cout << "Error. Out of range." << endl;
-		else			
+	
+	if (offset == 0)																	//OFFSET IS 0
+	{
+		if ((static_cast<int>(input) >= 65) && (static_cast<int>(input) <= 90))			//if input is an upper case letter
 		{
-			char newAsciiValue = static_cast<char>(newValue);
-			cout << "New character: " << newAsciiValue << endl;
+			output = input + u2l;														//change upper case to lower case
+			
+			cout << "New character: " << output;
+		}
+		
+		else if ((static_cast<int>(input) >= 97) && (static_cast<int>(input) <= 122))	//if input is a lower case letter
+		{
+			output = input - u2l;														//change lower case to upper case
+			cout << "New character: " << output;
+		}
+		
+		else 																			//if input is a symbol
+		{
+			output = input;																//no changes
+			cout << "New character: " << output;
 		}
 	}
-
+	
+	else																		//OFFSET IS NOT 0
+	{
+		output = input + offset;												//increase the decimal index of the character by offset
+		
+		if (static_cast<int>(output) > 127 || static_cast<int>(output) < 0)		//if the decimal index of the ASCII is outside of the range of [0,127] (7 bits)
+		{																		//ASCII holds 7 bits of characters and 1 bit used for error detection
+			cout << "Error. Out of range.";
+		}
+		
+		else																	//if not, output the new character increased by the offset
+		{
+			cout << "New character: " << output;
+		}
+	}
+	
 	return 0;
 }
+	
+	
