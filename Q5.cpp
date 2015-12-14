@@ -1,3 +1,5 @@
+//philyuan
+
 #include <iostream>
 #include <cmath>
 #include <stdio.h>
@@ -23,7 +25,7 @@ int main()
 	cin >> guess_1;
 	if (guess_1 == answer)										//if you're the luckiest (wo)man on earth (go buy a lottery ticket!)
 	{
-		cout << "Correct!  The number was " << answer << "!";
+	  cout << "Correct!  The number was " << answer << "!" << endl;
 		return 0;												//stop the main function, no need to go through while loop below
 	}
 	
@@ -36,7 +38,7 @@ int main()
 		//CHECK GUESS TO ANSWER
 		if (guess_2 == answer)									//if correct, stop the while loop
 		{
-		cout << "Correct!  The number was " << answer << "!";
+		  cout << "Correct!  The number was " << answer << "!" << endl;
 		break;													
 		}		
 		

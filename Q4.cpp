@@ -1,3 +1,5 @@
+//philyuan
+
 #include <iostream>
 
 using namespace std;
@@ -22,19 +24,19 @@ int main()
 		{
 			output = input + u2l;														//change upper case to lower case
 			
-			cout << "New character: " << output;
+			cout << "New character: " << output << endl;
 		}
 		
 		else if ((static_cast<int>(input) >= 97) && (static_cast<int>(input) <= 122))	//if input is a lower case letter
 		{
 			output = input - u2l;														//change lower case to upper case
-			cout << "New character: " << output;
+			cout << "New character: " << output << endl;
 		}
 		
 		else 																			//if input is a symbol
 		{
 			output = input;																//no changes
-			cout << "New character: " << output;
+			cout << "New character: " << output << endl;
 		}
 	}
 	
@@ -44,12 +46,12 @@ int main()
 		
 		if (static_cast<int>(output) > 127 || static_cast<int>(output) < 0)		//if the decimal index of the ASCII is outside of the range of [0,127] (7 bits)
 		{																		//ASCII holds 7 bits of characters and 1 bit used for error detection
-			cout << "Error. Out of range.";
+		  cout << "Error. Out of range." << endl;
 		}
 		
 		else																	//if not, output the new character increased by the offset
 		{
-			cout << "New character: " << output;
+		  cout << "New character: " << output << endl;
 		}
 	}
 	

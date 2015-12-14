@@ -1,3 +1,5 @@
+//philyuan
+
 #include <iostream>
 #include <cmath>		
 #include <iomanip>	
@@ -53,7 +55,7 @@ int main()
 		
 		after = (before * 9/5 + 32);
 		
-		cout << before << " Celsius is " << after << " Fahrenheit.";
+		cout << before << " Celsius is " << after << " Fahrenheit." << endl;
 	}
 	
 	else if (choice=="1")	//CELSIUS TO KELVIN
@@ -72,7 +74,7 @@ int main()
 				
 		after = (before + 273.15);
 		
-		cout << before << " Celsius is " << after << " Kelvin.";
+		cout << before << " Celsius is " << after << " Kelvin." << endl;
 	}
 	
 	else if (choice=="2")	//FAHRENHEIT TO CELSIUS
@@ -91,7 +93,7 @@ int main()
 				
 		after = ((before - 32) * 5/9);
 		
-		cout << before << " Fahrenheit is " << after << " Celcius.";
+		cout << before << " Fahrenheit is " << after << " Celcius." << endl;
 	}
 
 	else if (choice=="3")	//FAHRENHEIT TO KELVIN
@@ -111,7 +113,7 @@ int main()
 		after = ((before - 32) * 5/9);			//FAHRENHEIT TO CELSIUS
 		after = (after + 273.15);				//CELSIUS TO KELVIN
 		
-		cout << before << " Fahrenheit is " << after << " Kelvin.";
+		cout << before << " Fahrenheit is " << after << " Kelvin." << endl;
 	}
 
 	else if (choice=="4")	//KELVIN TO CELSIUS
@@ -130,7 +132,7 @@ int main()
 				
 		after = (before - 273.15);
 		
-		cout << before << " Kelvin is " << after << " Celsius.";
+		cout << before << " Kelvin is " << after << " Celsius." << endl;
 	}
 	
 	else if (choice=="5")	//KELVIN TO FAHRENHEIT
@@ -152,7 +154,7 @@ int main()
 		after = (after * 9/5 + 32);			//CELSIUS TO FAHRENHEIT
 		
 		
-		cout << before << " Kelvin is " << after << " Fahrenheit.";
+		cout << before << " Kelvin is " << after << " Fahrenheit." << endl;
 	}
 		
 return 0;

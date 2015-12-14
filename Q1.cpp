@@ -1,10 +1,10 @@
+//philyuan
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>	
 
 using namespace std;
-
-//philyuan's first program ^_^
 
 int main()
 {
@@ -34,13 +34,13 @@ int main()
 		area = sqrt( sp * (sp-side_1) * (sp-side_2) * (sp-side_3) );				//HERON'S FORMULA
 		
 		cout << fixed << setprecision(2);											//displays output up to 2 places after decimal point
-		cout << "This triangle's area is " << area << " square-units, and its perimeter is " << perimeter << " units.";
+		cout << "This triangle's area is " << area << " square-units, and its perimeter is " << perimeter << " units." << endl;
 	}
 	
 	//IF NOT LEGITIMATE TRIANGLE
 	else
 	{
-		cout << "Dimensions " << side_1 << ", " << side_2 << ", " << side_3 << " do not form a triangle.";
+	  cout << "Dimensions " << side_1 << ", " << side_2 << ", " << side_3 << " do not form a triangle." << endl;
 	}
 			
 	return 0;

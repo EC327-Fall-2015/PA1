@@ -1,3 +1,5 @@
+//philyuan
+
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -30,7 +32,8 @@ int main(){
 	l_a = hex_a.length();
 	l_b = hex_b.length();
 	
-	hammingd = abs(l_a - l_b);				//the difference in length (if any) will all count towards the hamming distance	
+	hammingd = abs(static_cast<float>(l_a - l_b));                              //the difference in length (if any) will all count towards the hamming distance
+     
 	
 	//COMPARISON LOOP
 	limit = min(l_a, l_b); 					//the number of times we do comparisons is the minimum of the two string lengths
@@ -46,7 +49,7 @@ int main(){
 		}
 	}
 	
-	cout << "Hamming distance between " << input_a << " and " << input_b << " when numbers are in hex format is: "<< hammingd;
+	cout << "Hamming distance between " << input_a << " and " << input_b << " when numbers are in hex format is: "<< hammingd << endl;
 	
 	return 0;
 }
