@@ -1,46 +1,38 @@
+	
 #include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <math.h> 
+#include <cstdlib> //used for system("pause"), not needed on lab computers
 using namespace std;
-
-static int x = 0xFFFFFFFF;
-
-int main() {
-    /* Store side lengths in length-3 double array. */
-    double x[3] = {0,0,0};
-    double s, a;
-
+ 
+int main()
+{
+ 
+    double side1, side2, side3;
+ 
     cout << "Enter the dimensions of the triangle:" << endl;
-    /* Read in the lengths of the three sides. */
     cout << "Side-1: ";
-    cin >> x[0];
+    cin >> side1;
+    cout << endl;
     cout << "Side-2: ";
-    cin >> x[1];
+    cin >> side2;
+    cout << endl;
     cout << "Side-3: ";
-    cin >> x[2];
-
-    /* Compute semiperimeter. */
-    s = (x[0] + x[1] + x[2]) / 2.0;
-
-    /* Compute squared area (as per Heron's formula). */
-    a = s;
-
-    cout << fixed << setprecision(2);
-    for (int i = 0; i < 3; i++) {
-        a *= (s - x[i]);
-        /* If at some point this goes to 0 (i.e. degenerate triangle) or
-           negative (failed triangle inequality), then this is not a
-           triangle. */
-        if (a <= 0) {
-            cout << "Dimensions " << x[0] << ", " << x[1] << ", "
-                 << x[2] << " do not form a triangle." << endl;
-            return 1;
-        }
+    cin >> side3;
+    cout << endl;
+ 
+    if ( ((side1 + side2) > side3) && ((side1 + side3) > side2) && ((side2 + side3) > side1) )
+    {
+        double perimeter = side1 + side2 + side3;
+        double semiperimeter = (side1 + side2 + side3) / 2;
+        double area = sqrt(semiperimeter * (semiperimeter - side1) * (semiperimeter - side2) * (semiperimeter - side3));
+ 
+        cout << "The triangle's area is " << area << " square-units and its perimeter is " << perimeter << " units." << endl;
     }
-
-    /* Output results. */
-    cout << "This triangle's area is " << sqrt(a) << " square-units, "
-         << "and its perimeter is " << (s * 2) << " units." << endl;
-    
+    else
+    {
+        cout << "Dimensions " << side1 << ", " << side2 << ", " << side3 << " do not form a triangle." << endl;
+    }
+ 
+    // system("pause"); 
     return 0;
 }

@@ -1,40 +1,66 @@
-#include<iostream>
-#include<sstream>
-#include<algorithm> 
-#include<cmath>
- 
+
+#include <iostream>
+#include <math.h>
 using namespace std;
-int main(){
-    int decimal_one, decimal_two;
-        cout<<"Enter two positive integers"<<endl;
-    cin>>decimal_one>>decimal_two;
-    //converting dec to hex 
-    stringstream ss, ss1;
-        ss<<hex<<decimal_one;
-        string res_one(ss.str());
-        ss1<<hex<<decimal_two;
-        string res_two(ss1.str());
-  
-    int size;
-    if (res_one.length()==(res_two.length())){
-        size=res_one.length();
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<< size-count<<endl;
-        }
-    else
-        {
-    size=min(res_one.length(),res_two.length());
-    int a,diff;
-    a=res_one.length()-res_two.length();
-    diff=abs(a);
-        int count=0;
-        for (int i=0;i<size;i++){
-            if (res_one[i]==res_two[i]){count++;}
-            }
-        cout<<"Hamming distance between "<<decimal_one<<" and "<< decimal_two<<" when numbers are in hex format is: "<<size-count+diff<<endl;
-        }
-  
-    }
+
+unsigned int result;
+
+int main() {
+
+	unsigned int num1;
+	unsigned int num2;
+	cout << "Enter two positive integers: ";
+	cin >> num1;
+	cin >> num2;
+	cout << endl;
+
+
+	unsigned int hexArray1[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	unsigned int hexArray2[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+	do {
+		static int i = 0;
+		static unsigned int val;
+		static unsigned int prevResult = num1;
+		static unsigned int remainderHexVal;
+
+		val = (prevResult % 16);
+
+		result = prevResult / 16;
+		remainderHexVal = prevResult % 16;
+	    hexArray1[i] = (remainderHexVal);
+
+		prevResult = result;
+		i++;
+
+
+	} while (result != 0); //while quotient != 0
+
+
+	do {
+		static int j = 0;
+		static unsigned int prevResult = num2;
+		static unsigned int remainderHexVal;
+
+		result = (prevResult / 16);
+		remainderHexVal = prevResult % 16;
+			hexArray2[j] = (prevResult % 16);
+
+		prevResult = result;
+		j++;
+
+	} while (result != 0);
+
+	unsigned int k;
+	unsigned int sum = 0;
+	for (k = 0; k != 9; k = k + 1)
+	{
+		if (hexArray1[k] != hexArray2[k])
+			sum++;
+	}
+
+	cout << "Hamming distance between " << num1 << " and " << num2 << " when the numbers are in hex format is: " << sum << endl;
+
+	system("pause");
+	return 0;
+}
