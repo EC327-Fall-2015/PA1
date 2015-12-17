@@ -1,46 +1,81 @@
 #include <iostream>
-#include <iomanip>
 #include <cmath>
+
 using namespace std;
 
-static int x = 0xFFFFFFFF;
-
-int main() {
-    /* Store side lengths in length-3 double array. */
-    double x[3] = {0,0,0};
-    double s, a;
-
-    cout << "Enter the dimensions of the triangle:" << endl;
-    /* Read in the lengths of the three sides. */
-    cout << "Side-1: ";
-    cin >> x[0];
-    cout << "Side-2: ";
-    cin >> x[1];
-    cout << "Side-3: ";
-    cin >> x[2];
-
-    /* Compute semiperimeter. */
-    s = (x[0] + x[1] + x[2]) / 2.0;
-
-    /* Compute squared area (as per Heron's formula). */
-    a = s;
-
-    cout << fixed << setprecision(2);
-    for (int i = 0; i < 3; i++) {
-        a *= (s - x[i]);
-        /* If at some point this goes to 0 (i.e. degenerate triangle) or
-           negative (failed triangle inequality), then this is not a
-           triangle. */
-        if (a <= 0) {
-            cout << "Dimensions " << x[0] << ", " << x[1] << ", "
-                 << x[2] << " do not form a triangle." << endl;
-            return 1;
-        }
-    }
-
-    /* Output results. */
-    cout << "This triangle's area is " << sqrt(a) << " square-units, "
-         << "and its perimeter is " << (s * 2) << " units." << endl;
-    
-    return 0;
+int main()
+{
+     cout <<"Enter the dimensions of the triangle:"<<endl;
+     cout<<"Side-1: ";
+     int side1;
+     cin>>side1;
+     cout<<"Side-2: ";
+     int side2;
+     cin>>side2;
+     cout<<"Side-3: ";
+     int side3;
+     cin>>side3;
+     int max; 
+     int area;
+     int perimeter;
+     int midde;
+     int last;
+     if ((side1 >= (side2+side3))||(side2 >= (side1+side3))|| (side3 >=(side1+side2))||(side1 + side2 +side3 <=2))
+	 {
+	   cout<<"Dimensions "<< side1 << ", " << side2 <<"' "<<side3 << "do not make a triangle"<<endl;
+		}
+       else 
+	 {
+	   
+	   if ((side1 > side2)&& (side1 > side3))
+	     {
+	       max = side1;
+		 if (side2 > side3)
+		   {
+		     int midde = side2;
+		     int last = side3;
+		   }
+		 else
+		   {
+		     midde = side3;
+		     last = side2;
+		       } 
+	     }
+	     else if ((side2 > side1)&& (side2 > side3))
+	     {
+	       max = side2;
+	       if (side1 > side3)
+		   {
+		     int midde = side1;
+		     int last = side3;
+		   }
+		 else
+		   {
+		     midde = side3;
+		     last = side1;
+		       }
+		 }  
+	  else  if  ((side3 > side2)&& (side3 > side1))
+	     {
+	       max = side3;
+		 if (side2 > side1)
+		   {
+		     int midde = side2;
+		     int last = side1;
+		   }
+		 else
+		   {
+		     midde = side1;
+		     last = side2;
+		       }
+		 }
+	 }
+     int part1 = (side1 + side2 + side3)*.5;
+     int part2 = part1 * (part1 - max)*(part1 - midde)* (part1 - last);
+     area = sqrt(part2);
+     perimeter = side1 + side2 + side3; 
+     cout <<"This triangle's area is "<< area <<" square units and its perimeter is "<<perimeter << " units"<<endl;
+   return 0;
 }
+
+	 
